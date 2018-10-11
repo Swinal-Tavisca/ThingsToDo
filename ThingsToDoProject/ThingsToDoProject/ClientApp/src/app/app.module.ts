@@ -27,10 +27,13 @@ import { RightviewComponent } from './rightview/rightview.component';
     MatIconModule,
     MatButtonModule,
     FlexLayoutModule,
+
     RouterModule.forRoot([
+
       { path: '',component: LeftviewComponent, pathMatch: 'full' },
       { path: 'All',component: LeftviewComponent},
       { path: '**',component: RightviewComponent},
+
     ])
   ],
   providers: [],
