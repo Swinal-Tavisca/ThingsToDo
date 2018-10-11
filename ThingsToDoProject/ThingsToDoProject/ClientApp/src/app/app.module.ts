@@ -28,9 +28,9 @@ import { RightviewComponent } from './rightview/rightview.component';
     MatButtonModule,
     FlexLayoutModule,
     RouterModule.forRoot([
-      { path: '', component: LeftviewComponent, pathMatch: 'full' },
-      { path: 'map', component: RightviewComponent },
-      { path: '**', component: LeftviewComponent },
+      { path: '',component: LeftviewComponent, pathMatch: 'full' },
+      { path: 'All',component: LeftviewComponent},
+      { path: '**',component: RightviewComponent},
     ])
   ],
   providers: [],

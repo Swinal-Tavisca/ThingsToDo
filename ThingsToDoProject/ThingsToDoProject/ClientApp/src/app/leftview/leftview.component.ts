@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-leftview',
@@ -7,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftviewComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private router: Router) { 
+      console.log(this.router.url,"Current URL");
+  }
   ngOnInit() {
   }
 

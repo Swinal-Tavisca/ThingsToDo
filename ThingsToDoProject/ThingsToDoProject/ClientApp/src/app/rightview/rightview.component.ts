@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rightview',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RightviewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { 
+    console.log(this.router.url,"Current Map URL");
+}
 
   ngOnInit() {
   }
