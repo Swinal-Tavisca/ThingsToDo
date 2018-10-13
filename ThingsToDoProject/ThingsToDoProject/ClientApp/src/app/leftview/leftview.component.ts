@@ -10,6 +10,7 @@ export class LeftviewComponent implements OnInit {
 
   constructor(private router: Router) { 
       console.log(this.router.url,"Current URL");
+      
   }
   ngOnInit() {
   }

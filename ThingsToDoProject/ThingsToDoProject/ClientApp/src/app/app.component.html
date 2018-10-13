@@ -5,7 +5,9 @@
               <mat-icon>menu</mat-icon>
             </button>
             <span>Let's Explore</span>
-            <span class="menu-spacer"></span>
+                <!-- <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Search" value="">
+                </mat-form-field> -->
             </mat-toolbar-row>
       </mat-toolbar>
 </div>
@@ -40,7 +42,7 @@
       <span class='glyphicon glyphicon-home'></span> Restaurant
   </a>
   <a (click)="sidenav.toggle()" [routerLink]='["/Store"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' mat-list-item>
-    <span class='glyphicon glyphicon-home'></span> Store
+    <span class='glyphicon glyphicon-home'></span> Stores
 </a>
 <button (click)="sidenav.toggle()" mat-raised-button mat-list-item>
     Set Reminder
