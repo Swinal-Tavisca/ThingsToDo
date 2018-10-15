@@ -18,7 +18,9 @@ namespace ThingsToDoProject.Controllers
         public IEnumerable<string> Get()
         {
             string City = "Pune";
-            Location Position = GetLatitudeLongitudeOfParticularCity.GetLatitudeLogitude(City);
+            string typevalue = "store";
+            //Location Position = GetLatitudeLongitudeOfParticularCity.GetLatitudeLogitude(City);
+            List<TypeModel> Data = GetDataOfParticularType.GetAllDataOfParticularType(typevalue);
             return new string[] { "value1", "value2" };
         }
 
