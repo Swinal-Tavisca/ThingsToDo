@@ -2,21 +2,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule , MatInputModule} from "@angular/material";
+import { MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule , MatInputModule,MatCardModule} from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { AgmCoreModule} from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
-
+import 'hammerjs';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { LeftviewComponent } from './leftview/leftview.component';
-import { RightviewComponent } from './rightview/rightview.component';
+import { DataComponent } from './data/data.component';
+import { MainContentComponent } from './main-content/main-content.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    LeftviewComponent,
-    RightviewComponent
+    DataComponent,
+    MainContentComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,12 +33,21 @@ import { RightviewComponent } from './rightview/rightview.component';
     MatButtonModule,
     FlexLayoutModule,
     MatInputModule,
+    AgmCoreModule.forRoot(
+      {
+        apiKey:'AIzaSyA9v-ByUMauD8TazXdViq_f7RF-EHru86A'
+      }
+    ), AgmDirectionModule,
+    MatCardModule,
+    AgmSnazzyInfoWindowModule,
+    [BrowserAnimationsModule],
 
     RouterModule.forRoot([
 
-      { path: '',component: LeftviewComponent, pathMatch: 'full' },
-      { path: 'All',component: LeftviewComponent},
-      { path: '**',component: RightviewComponent},
+      { path: '',redirectTo: '/Home', pathMatch: 'full' },
+      { path: 'Home',component: MainContentComponent},
+      { path: 'Restaurant',component: MainContentComponent},
+      { path: '**',redirectTo: '/Home'},
 
     ])
   ],

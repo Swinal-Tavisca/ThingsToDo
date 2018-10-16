@@ -8,9 +8,9 @@ using ThingsToDoProject.Model;
 
 namespace ThingsToDoProject.Core.Translater
 {
-    public class TransalateDataOfParticularType: ITranslater
+    public static class TransalateDataOfParticularType
     {
-        public List<DataAttributes> TransalateData(JArray results)
+        public static List<DataAttributes> TransalateData(this JArray results)
         {
             List<DataAttributes> StoreDetails = new List<DataAttributes>();
             for (var index = 0; index < results.Count; index++)

@@ -8,20 +8,20 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using ThingsToDoProject.Core.Interface;
 using ThingsToDoProject.Model;
+using ThingsToDoProject.Core.Provider;
+using ThingsToDoProject.Core.Translater;
 
 namespace ThingsToDoProject.Core.Provider
 {
     public class GetDataOfParticularType : IGetData
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly ITranslater _translater;
         IConfiguration _iconfiguration;
 
-        public GetDataOfParticularType(IHttpClientFactory httpClientFactory , IConfiguration configuration , ITranslater translater)
+        public GetDataOfParticularType(IHttpClientFactory httpClientFactory , IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
             _iconfiguration = configuration;
-            _translater = translater;
         }
         public async Task<List<DataAttributes>> GetData(Location Position, string TypeValue)
         {
@@ -33,7 +33,7 @@ namespace ThingsToDoProject.Core.Provider
                     Uri endpoint = client.BaseAddress; // Returns GoogleApi
                     var Key = _iconfiguration["GoogleAPI"];
                     var Url = endpoint.ToString() + "maps/api/place/nearbysearch/json?location=18.579343,73.9089168&radius=1000&type=" + TypeValue + "&key=" + Key;
-                //var Url = endpoint.ToString() + "maps/api/place/nearbysearch/json?location=" + Position.LatitudePosition + "," + Position.LongitudePosition + "&radius=1000&type=" + TypeValue + "&key=" + Key;
+                    //var Url = endpoint.ToString() + "maps/api/place/nearbysearch/json?location=" + Position.LatitudePosition + "," + Position.LongitudePosition + "&radius=1000&type=" + TypeValue + "&key=" + Key;
                     var client1 = _httpClientFactory.CreateClient();
                     var response = await client1.GetAsync(Url);
 
@@ -42,7 +42,9 @@ namespace ThingsToDoProject.Core.Provider
                     ////var finalObject = JsonConvert.DeserializeObject<>(responseBody);
                     var data = (JObject)JsonConvert.DeserializeObject(responseBody);
                     var results = data["results"].Value<JArray>();
-                    List<DataAttributes> Data = _translater.TransalateData(results);
+                   // List<DataAttributes> Data = _translater.TransalateData(results);
+                    List<DataAttributes> Data = results.TransalateData();
+
 
 
                 return Data;
@@ -54,4 +56,12 @@ namespace ThingsToDoProject.Core.Provider
             return null;
         }
     }
+    
+    //public static class Translator
+    //{
+    //    public static List<DataAttributes> GetTranslatedData(this JArray result)
+    //    {
+    //        return null;
+    //    }
+    //}
 }

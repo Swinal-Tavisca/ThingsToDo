@@ -25,9 +25,13 @@ namespace ThingsToDoProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddSingleton<IGetLatitudeLongitude, GetLatitudeLongitude>();
             services.AddSingleton<IGetData, GetDataOfParticularType>();
-            services.AddSingleton<ITranslater, TransalateDataOfParticularType>();
+
+            services.AddSingleton<IGetOutsideData, GetOutsideAirportData>();
+
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

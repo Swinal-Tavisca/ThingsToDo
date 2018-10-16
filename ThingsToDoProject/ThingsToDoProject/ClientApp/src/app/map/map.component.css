@@ -1,0 +1,10 @@
+agm-map {
+    height: 830px;
+  }
+  #wide {
+    display:inline-block;
+
+    background: lightgreen;
+   width:70%;
+   
+  }
