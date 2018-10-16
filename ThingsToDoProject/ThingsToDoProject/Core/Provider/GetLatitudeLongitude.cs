@@ -1,17 +1,17 @@
-﻿using System;
+﻿using GoogleMaps.LocationServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ThingsToDoProject.Core.Interface;
 using ThingsToDoProject.Model;
-using GoogleMaps.LocationServices;
 
-namespace ThingsToDoProject.DataAccess
+namespace ThingsToDoProject.Core.Provider
 {
-    public static class GetLatitudeLongitudeOfParticularCity
+    public class GetLatitudeLongitude : IGetLatitudeLongitude
     {
-        public static Location GetLatitudeLogitude(string CityName)
+        public Location Get(string CityName)
         {
-            //String paremeter that provides the google map api key
             Location Position = new Location();
             Position.Address = CityName;
             var locationService = new GoogleLocationService(apikey: "AIzaSyA9v-ByUMauD8TazXdViq_f7RF-EHru86A");

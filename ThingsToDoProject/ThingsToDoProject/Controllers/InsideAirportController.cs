@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ThingsToDoProject.DataAccess;
+using ThingsToDoProject.Core.Interface;
+using ThingsToDoProject.Core.Provider;
 using ThingsToDoProject.Model;
 
 namespace ThingsToDoProject.Controllers
@@ -13,16 +14,37 @@ namespace ThingsToDoProject.Controllers
     [ApiController]
     public class InsideAirportController : ControllerBase
     {
-        // GET: api/InsideAirport
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IGetData _getData;
+
+        public InsideAirportController(IGetData getData)
         {
-            string City = "Pune";
-            string typevalue = "store";
-            //Location Position = GetLatitudeLongitudeOfParticularCity.GetLatitudeLogitude(City);
-            List<TypeModel> Data = GetDataOfParticularType.GetAllDataOfParticularType(typevalue);
-            return new string[] { "value1", "value2" };
+            _getData = getData;
         }
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            string City = "Pune Airport";
+            string TypeValue = "store";
+            GetLatitudeLongitude PositionObject = new GetLatitudeLongitude();
+            //Location Position = PositionObject.Get(City);
+            Location Position = null;
+            var Data = await _getData.GetData(Position, TypeValue);
+            if (Data != null)
+                return Ok(Data);
+            else
+                return BadRequest("Not Found");
+        }
+        //[HttpGet]
+        //// GET: api/InsideAirport
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    string City = "Pune";
+        //    string typevalue = "store";
+        //    //Location Position = GetLatitudeLongitudeOfParticularCity.GetLatitudeLogitude(City);
+        //    List<DataAttributes> Data = DataAccess.GetDataOfParticularType.GetAllDataOfParticularType(typevalue);
+        //    return new string[] { "value1", "value2" };
+        //}
 
         // GET: api/InsideAirport/5
         [HttpGet("{id}", Name = "Get")]

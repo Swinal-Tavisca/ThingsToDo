@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using ThingsToDoProject.Core.Interface;
+using ThingsToDoProject.Core.Provider;
+using ThingsToDoProject.Core.Translater;
 
 namespace ThingsToDoProject
 {
@@ -22,12 +25,20 @@ namespace ThingsToDoProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            services.AddSingleton<IGetLatitudeLongitude, GetLatitudeLongitude>();
+            services.AddSingleton<IGetData, GetDataOfParticularType>();
+            services.AddSingleton<ITranslater, TransalateDataOfParticularType>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddHttpClient("GoogleClient", client =>
+            {
+                client.BaseAddress = new Uri("https://maps.googleapis.com");
+            });
+            services.AddSingleton<IConfiguration>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

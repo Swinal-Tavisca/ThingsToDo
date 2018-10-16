@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace ThingsToDoProject.Model
 {
-    public class TypeModel
+    public class DataAttributes
     {
         public string Name { get; set; }
         public string OpenClosedStatus { get; set; }
         public string PhotoReference { get; set; }
         public string PlaceID { get; set; }
-        public string Rating { get; set; }
+        public int Rating { get; set; }
         public string Type { get; set; }
         public string Vicinity { get; set; }
         public string Latitude { get; set; }
