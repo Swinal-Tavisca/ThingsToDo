@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-map',
@@ -6,18 +8,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
+  public response:any;
+  _i:any;
+  constructor(private route: ActivatedRoute, private router: Router , private http: HttpClient) { 
+    console.log(this.router.url,"Current URL");
+    
+}
 
-  constructor() { }
-
+  ngOnInit() {
+    this.http.get('http://localhost:55600/api/InsideAirport').
+    subscribe((response)=>
+    {
+    this.response = response;
+    for (this._i= 0; this._i < this.response.length; this._i++) {
+      var num = this.response[this._i];
+      console.log(num);
+    }
+    console.log(this.response);
+    })
+    console.log(this.route.snapshot.queryParamMap.has('location'));
+    console.log(this.route.snapshot.queryParamMap.get('location'));
+    console.log(this.route.snapshot.queryParamMap.has('time'));
+    console.log(this.route.snapshot.queryParamMap.get('time'));
+  }
 
   lat: number =51.373858;
   lng: number = 5.809007;
   public origin: any;
   public destination: any;
   
-  ngOnInit() {
-   
-  }
+
    
   getDirection(marker,latitude: number,longitude: number) {
     this.origin = { lat: 51.373858, lng: 5.809007 }
@@ -29,6 +49,7 @@ export class MapComponent implements OnInit {
   public renderOptions = {
     suppressMarkers: true,
 }
+
 
 markers: marker[] = [
   {

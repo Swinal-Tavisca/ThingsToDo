@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { DataComponent } from './data/data.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { MapComponent } from './map/map.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,12 +26,14 @@ import { MapComponent } from './map/map.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
     MatIconModule,
     MatButtonModule,
+    MatCardModule,
     FlexLayoutModule,
     MatInputModule,
     AgmCoreModule.forRoot(

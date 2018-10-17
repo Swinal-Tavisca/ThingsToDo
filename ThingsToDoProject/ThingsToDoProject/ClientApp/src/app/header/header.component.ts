@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -15,9 +16,11 @@ export class HeaderComponent implements OnInit {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(this.route.snapshot.queryParamMap.has('location'));
+    console.log(this.route.snapshot.queryParamMap.get('location'));
   }
 
 }
