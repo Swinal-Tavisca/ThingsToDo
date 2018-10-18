@@ -1,0 +1,27 @@
+<div id="wide">
+ 
+    <agm-map [latitude]="lat" [longitude]="lng" #gm  >
+        <agm-marker 
+        *ngFor="let m of markers; let i = index"
+        [latitude]="m.lat"
+        [longitude]="m.lng"
+        [label]="m.label"
+        [iconUrl]="m.iconUrl"
+        [markerClickable]="m.markerClickable"
+        (markerClick)="getDirection(m,m.lat,m.lng)">
+          <agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true"    [backgroundColor]="'#ADD8E6'"  [border]="true" [borderRadius]="'10px'"  [fontSize]="'100px'" [fontColor]="'#FF0000'" [padding]="'20px'">  
+            <ng-template>
+                
+                <mat-card>{{m.name}}
+                  {{m.rating}}</mat-card>
+              
+            </ng-template>
+          </agm-snazzy-info-window>
+       
+          <agm-direction [origin]="origin" [destination]="destination" [renderOptions]="renderOptions" >
+        </agm-direction>
+      
+    </agm-marker>
+     
+    </agm-map>
+</div>
