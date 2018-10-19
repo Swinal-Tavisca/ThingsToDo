@@ -46,7 +46,7 @@ namespace ThingsToDoProject.Core.Translater
                 catch { store.Vicinity = "Not Available"; }
                 var geometry = resultObject["geometry"].Value<JObject>();
                 var location = geometry["location"].Value<JObject>();
-                store.Longitute = location["lng"].Value<string>();
+                store.Longitude = location["lng"].Value<string>();
                 store.Latitude = location["lat"].Value<string>();
                 StoreDetails.Add(store);
             }

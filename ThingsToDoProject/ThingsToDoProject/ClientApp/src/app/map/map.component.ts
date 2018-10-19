@@ -7,96 +7,81 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
-  public response:any;
-  _i:any;
-  constructor(private route: ActivatedRoute, private router: Router , private http: HttpClient) { 
-    console.log(this.router.url,"Current URL");
-    
+export class MapComponent implements OnInit{
+  title: string = 'My first AGM project';
+  Getresponse:any;
+  lat: number ;
+  lng: number ;
+  isDataLoaded:boolean = false;
+  iconUrl: string = "assets/images/icons8-user-location-48.png";
+  public origin: any; 
+  public destination: any;
+ city:string;
+  getDirection(latitude: number,longitude: number) {
+    console.log(this.Getresponse);
+    console.log(this.Getresponse.latitudePosition);
+    this.origin = { lat:this.Getresponse.latitudePosition, lng:this.Getresponse.longitudePosition};
+    this.destination = { lat: latitude, lng: longitude};
+  }
+  closeInfoWindow(infoWindow,gm)
+  {
+    console.log('amakh');
+    if (gm.lastOpen != null) {
+      gm.lastOpen.close();
+  }
+
+  }
+  onMouseOver(infoWindow, gm) {
+
+    if (gm.lastOpen != null) {
+        gm.lastOpen.close();
+    }
+
+    gm.lastOpen = infoWindow;
+
+    infoWindow.open();
 }
 
- ngOnInit() {
-     this.http.get('http://localhost:51346/api/InsideAirport').
-    subscribe((response)=>
-    {
-    this.response = response;
-    
-    console.log(this.response);
-    
-    console.log(this.response[0]);
-    
-    for(let data in response){
-    
-    this.markers.push({
-    
-    lat: Number(response[data].longitute),
-    
-    lng: Number(response[data].latitude)
-    
-    })
-    
-    console.log(typeof this.markers[data].lat);
-    
-    }
-    
-    console.log(this.markers);
-    
-    for(let m of this.markers) {
-    
-    console.log(m.lat);
-    
-    }
-    console.log(this.route.snapshot.queryParamMap.has('location'));
-    console.log(this.route.snapshot.queryParamMap.get('location'));
-    console.log(this.route.snapshot.queryParamMap.has('time'));
-    console.log(this.route.snapshot.queryParamMap.get('time'));
-    })
-  }
-    
-  
-
-
-
-
-  lat: number = 18.573013;
-  lng: number = 73.907546;
-  public origin: any;
-  public destination: any;
-  
-
-   
-  getDirection(marker,latitude: number,longitude: number) {
-    this.origin = { lat: 51.373858, lng: 5.809007 }
-    this.destination = { lat: latitude, lng: longitude}
-    console.log('xyz');
-    
-//marker.iconUrl = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
-  }
   public renderOptions = {
     suppressMarkers: true,
 }
+constructor(private route: ActivatedRoute, private router: Router , private http: HttpClient) { 
+  console.log(this.router.url,"Current URL");
+  //console.log(this.city= this.route.snapshot.queryParamMap.get('location'));
+}
+markers: Array<marker>=[];
+response: any;
+  ngOnInit() {
+    
+    this.isDataLoaded=true;
+    this.city= this.route.snapshot.queryParamMap.get('location');
+    this.http.get('http://localhost:64570/api/Data/position/'+this.city).subscribe((response)=>{
+      this.Getresponse = response;
+      this.lat =  this.Getresponse.latitudePosition;
+      this.lng=this.Getresponse.longitudePosition;
+      
+    })
 
+ this.http.get('http://localhost:64570/api/Data/insideAirport/puneairport/12/13/store').
+  subscribe((response)=>
+  {
+  this.response = response;
+  for(let data in response){
+    this.markers.push({
+      lat: Number(response[data].latitude),
+      lng: Number(response[data].longitude),
+      name:response[data].name,
+      rating:response[data].rating,
 
-markers: marker[] = [
-  {
-    lat:18.573013,
-    lng: 73.907546,
-  
-  },
-  {
-    lat:18.573013,
-    lng: 73.907546,
- 
-  },
-  {
-    lat:18.573013,
-    lng: 73.907546,
+    })
   }
-]
+})
 }
-interface marker {
-lat: number;
-lng: number;
+}
+class marker {
+  lat: number;
+  lng: number;  
+name:string;
+rating:string
 
 }
-

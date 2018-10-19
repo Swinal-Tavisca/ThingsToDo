@@ -18,6 +18,6 @@ namespace ThingsToDoProject.Model
         public string Type { get; set; }
         public string Vicinity { get; set; }
         public string Latitude { get; set; }
-        public string Longitute { get; set; }
+        public string Longitude { get; set; }
     }
 }
