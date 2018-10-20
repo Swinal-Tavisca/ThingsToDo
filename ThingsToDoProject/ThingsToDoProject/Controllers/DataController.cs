@@ -17,11 +17,13 @@ namespace ThingsToDoProject.Controllers
         private readonly IGetOutsideData _getAllData;
         private readonly IGetData _getData;
         private readonly IGetLatitudeLongitude _getLatitudeLongitude;
-        public DataController(IGetOutsideData getAllData, IGetData getData, IGetLatitudeLongitude getLatitudeLongitude)
+        private readonly IGetInsideOutside _getInsideOutsideData;
+        public DataController(IGetOutsideData getAllData, IGetData getData, IGetLatitudeLongitude getLatitudeLongitude, IGetInsideOutside getInsideOutsideData)
         {
             _getAllData = getAllData;
             _getData = getData;
             _getLatitudeLongitude = getLatitudeLongitude;
+            _getInsideOutsideData = getInsideOutsideData;
         }
         //GET: api/Data/outsideAirport
         [HttpGet("outsideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}")]
@@ -40,15 +42,27 @@ namespace ThingsToDoProject.Controllers
         //PointOfInterest is any Stores/Restorents...etc
         public async Task<IActionResult> GetInsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
         {
-            //string City = "Pune Airport";
-           // string TypeValue = "store";
-            Location Position = _getLatitudeLongitude.Get(DeparturePlace);
+
+            Location Position = _getLatitudeLongitude.Get(DeparturePlace + "Airport");
             var Data = await _getData.GetData(Position, DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
             if (Data != null)
                 return Ok(Data);
             else
                 return BadRequest("Not Found");
         }
+
+        //GET: api/Data/InsideOutsideAirport
+        [HttpGet("InsideOutsideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}")]
+        public async Task<IActionResult> GetInsideOutsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        {
+            Location Position = _getLatitudeLongitude.Get(DeparturePlace + "Airport");
+            var Data = await _getInsideOutsideData.GetInsideOutsideData(Position, DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
+            if (Data != null)
+                return Ok(Data);
+            else
+                return BadRequest("Not Found");
+        }
+
 
         //GET: api/Data/position
         [HttpGet("position/{Location}")]

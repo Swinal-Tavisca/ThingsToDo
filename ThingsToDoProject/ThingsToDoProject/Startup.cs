@@ -28,8 +28,8 @@ namespace ThingsToDoProject
 
             services.AddSingleton<IGetLatitudeLongitude, GetLatitudeLongitude>();
             services.AddSingleton<IGetData, GetDataOfParticularType>();
-
             services.AddSingleton<IGetOutsideData, GetOutsideAirportData>();
+            services.AddSingleton<IGetInsideOutside, GetInsideOutsideAirportData>();
 
 
             // In production, the Angular files will be served from this directory

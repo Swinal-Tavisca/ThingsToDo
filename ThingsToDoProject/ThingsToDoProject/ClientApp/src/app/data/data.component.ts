@@ -17,7 +17,7 @@ export class DataComponent implements OnInit {
 }
 
   ngOnInit() {
-    this.http.get('http://localhost:57656/api/Data/insideAirport/DelhiAirport/12/13/store').
+    this.http.get('http://localhost:53617/api/Data/insideAirport/DelhiAirport/12/13/store').
     subscribe((response)=>
     {
     this.response = response;
