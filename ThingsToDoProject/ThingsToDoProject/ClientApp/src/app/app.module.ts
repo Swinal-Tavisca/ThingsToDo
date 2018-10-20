@@ -15,6 +15,7 @@ import { DataComponent } from './data/data.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReminderComponent } from './reminder/reminder.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     DataComponent,
     MainContentComponent,
     MapComponent,
+    ReminderComponent,
   ],
   imports: [
     BrowserModule,

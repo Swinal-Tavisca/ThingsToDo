@@ -55,14 +55,14 @@ response: any;
     
     this.isDataLoaded=true;
     this.city= this.route.snapshot.queryParamMap.get('location');
-    this.http.get('http://localhost:64570/api/Data/position/'+this.city).subscribe((response)=>{
+    this.http.get('http://localhost:57656/api/Data/position/'+this.city).subscribe((response)=>{
       this.Getresponse = response;
       this.lat =  this.Getresponse.latitudePosition;
       this.lng=this.Getresponse.longitudePosition;
       
     })
 
- this.http.get('http://localhost:64570/api/Data/insideAirport/puneairport/12/13/store').
+ this.http.get('http://localhost:57656/api/Data/insideAirport/puneairport/12/13/store').
   subscribe((response)=>
   {
   this.response = response;
