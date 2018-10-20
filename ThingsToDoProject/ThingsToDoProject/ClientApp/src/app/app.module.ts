@@ -51,7 +51,8 @@ import { ReminderComponent } from './reminder/reminder.component';
 
       { path: '',redirectTo: '/Home', pathMatch: 'full' },
       { path: 'Home',component: MainContentComponent},
-      { path: 'Restaurant',component: MainContentComponent},
+      { path: 'restaurant',component: MainContentComponent},
+      { path: 'store',component: MainContentComponent},
       { path: '**',redirectTo: '/Home'},
 
     ])

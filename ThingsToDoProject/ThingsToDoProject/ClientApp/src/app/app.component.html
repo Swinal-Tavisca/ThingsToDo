@@ -29,10 +29,10 @@
                     <a (click)="sidenav.toggle()" [routerLink]='["/Home"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' mat-list-item>
                         <mat-icon>home</mat-icon> Home
                     </a>
-                    <a (click)="sidenav.toggle()" (click)="Category()"[routerLink]='["/Restaurant"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' mat-list-item>
+                    <a (click)="sidenav.toggle()" (click)="Category()"[routerLink]='["/restaurant"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' mat-list-item>
                         <mat-icon>store</mat-icon> Restaurant
                     </a>
-                    <a (click)="sidenav.toggle()" [routerLink]='["/Store"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' mat-list-item>
+                    <a (click)="sidenav.toggle()" [routerLink]='["/store"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' mat-list-item>
                         <mat-icon>store</mat-icon> Store
                     </a>
                     <button (click)="sidenav.toggle()" mat-raised-button mat-list-item>
@@ -53,10 +53,10 @@
                             </a>
                             <mat-divider class="vertical-divider"></mat-divider>
                             <div class="space"></div>
-                            <a [routerLink]='["/Restaurant"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-button>
+                            <a [routerLink]='["/restaurant"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-button>
                                 <mat-icon>store</mat-icon> Restaurant
                             </a>
-                            <a [routerLink]='["/Store"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' mat-button>
+                            <a [routerLink]='["/store"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-button >
                                 <mat-icon>store</mat-icon> Store
                             </a>
                             <span class="example-spacer"></span>

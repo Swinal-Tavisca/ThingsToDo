@@ -13,7 +13,5 @@ export class MainContentComponent implements OnInit {
   ngOnInit() {
     console.log(this.route.snapshot.queryParamMap.has('location'));
     console.log(this.route.snapshot.queryParamMap.get('location'));
-    console.log(this.route.snapshot.queryParamMap.has('time'));
-    console.log(this.route.snapshot.queryParamMap.get('time'));
   }
 }

@@ -45,24 +45,42 @@ export class MapComponent implements OnInit{
   public renderOptions = {
     suppressMarkers: true,
 }
+type:any;
+  location:any;
+  arrivalDatetime:any;
+  DepartureDateTime:any;
+  durationminutes:any;
+  arrivalterminal:any;
+  departureterminal:any;
+
 constructor(private route: ActivatedRoute, private router: Router , private http: HttpClient) { 
   console.log(this.router.url,"Current URL");
-  //console.log(this.city= this.route.snapshot.queryParamMap.get('location'));
+  this.type= this.router.url.substring(1,this.router.url.indexOf('?'));
+  this.location = this.route.snapshot.queryParamMap.get('location');
+  this.arrivalDatetime = this.route.snapshot.queryParamMap.get('ArrivalDateTime');
+  this.DepartureDateTime = this.route.snapshot.queryParamMap.get('DepartureDateTime');
+  this.arrivalterminal = this.route.snapshot.queryParamMap.get('ArrivalTerminal');
+  this.departureterminal = this.route.snapshot.queryParamMap.get('DepartureTerminal');
+  console.log(this.durationminutes = this.route.snapshot.queryParamMap.get('DurationMinutes'));
+  console.log(this.arrivalterminal);
+  console.log(this.departureterminal);
 }
 markers: Array<marker>=[];
 response: any;
+ 
   ngOnInit() {
     
     this.isDataLoaded=true;
     this.city= this.route.snapshot.queryParamMap.get('location');
-    this.http.get('http://localhost:57656/api/Data/position/'+this.city).subscribe((response)=>{
+    console.log(this.city);
+    this.http.get('http://localhost:53513/api/Data/position/'+this.city).subscribe((response)=>{
       this.Getresponse = response;
       this.lat =  this.Getresponse.latitudePosition;
       this.lng=this.Getresponse.longitudePosition;
       
     })
 
- this.http.get('http://localhost:57656/api/Data/insideAirport/puneairport/12/13/store').
+this.http.get('http://localhost:53513/api/Data/insideAirport/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
   subscribe((response)=>
   {
   this.response = response;
