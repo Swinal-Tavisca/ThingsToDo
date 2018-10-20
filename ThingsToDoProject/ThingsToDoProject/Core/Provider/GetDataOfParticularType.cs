@@ -23,13 +23,13 @@ namespace ThingsToDoProject.Core.Provider
             _httpClientFactory = httpClientFactory;
             _iconfiguration = configuration;
         }
-        public async Task<List<DataAttributes>> GetData(Location Position , String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        public async Task<List<DataAttributes>> GetData(LocationAttributes Position , String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
         {
             try
             {
                 //using (HttpClient client = new HttpClient())
                 //{
-                    var client = _httpClientFactory.CreateClient("GoogleClient");
+                    var client = _httpClientFactory.CreateClient(Constants.GoogleClient);
                     Uri endpoint = client.BaseAddress; // Returns GoogleApi
                     var Key = _iconfiguration["GoogleAPI"];
                     //var Url = endpoint.ToString() + "maps/api/place/nearbysearch/json?location=18.579343,73.9089168&radius=1000&type=" + PointOfInterest + "&key=" + Key;

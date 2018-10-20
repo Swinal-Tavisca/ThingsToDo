@@ -14,8 +14,6 @@ namespace ThingsToDoProject.Model
         public string PhotoReference { get; set; }
         public string PlaceID { get; set; }
         public int Rating { get; set; }
-        public JArray AllType { get; set; }
-        public string Type { get; set; }
         public string Vicinity { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }

@@ -10,9 +10,9 @@ namespace ThingsToDoProject.Core.Provider
 {
     public class GetLatitudeLongitude : IGetLatitudeLongitude
     {
-        public Location Get(string CityName)
+        public LocationAttributes Get(string CityName)
         {
-            Location Position = new Location();
+            LocationAttributes Position = new LocationAttributes();
             Position.Address = CityName;
             var locationService = new GoogleLocationService(apikey: "AIzaSyA9v-ByUMauD8TazXdViq_f7RF-EHru86A");
             var Point = locationService.GetLatLongFromAddress(Position.Address);

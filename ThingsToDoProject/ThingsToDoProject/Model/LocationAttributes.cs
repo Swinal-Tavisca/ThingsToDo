@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ThingsToDoProject.Model
 {
-    public class Location
+    public class LocationAttributes
     {
         public string Address;
         public double LatitudePosition;

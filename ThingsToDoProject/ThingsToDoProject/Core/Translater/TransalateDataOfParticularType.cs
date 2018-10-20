@@ -37,10 +37,10 @@ namespace ThingsToDoProject.Core.Translater
                 try{store.Rating = Convert.ToInt32(resultObject["rating"].Value<string>());}
                 catch{store.Rating = -1;}
 
-                try{
-                    store.AllType = resultObject["types"].Value<JArray>();
-                    store.Type = Type;}
-                catch{store.Type = Type;}
+                //try{
+                //    store.AllType = resultObject["types"].Value<JArray>();
+                //    store.Type = Type;}
+                //catch{store.Type = Type;}
 
                 try{ store.Vicinity = resultObject["vicinity"].Value<string>();}
                 catch { store.Vicinity = "Not Available"; }

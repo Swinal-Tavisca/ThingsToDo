@@ -25,7 +25,7 @@ namespace ThingsToDoProject.Core.Provider
             _getInsideData = getInsideData;
 
         }
-        public async Task<List<DataAttributes>> GetInsideOutsideData(Location Position, String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        public async Task<List<DataAttributes>> GetInsideOutsideData(LocationAttributes Position, String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
         {
 
             List<DataAttributes> OutsideData = await _getOutsideData.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
