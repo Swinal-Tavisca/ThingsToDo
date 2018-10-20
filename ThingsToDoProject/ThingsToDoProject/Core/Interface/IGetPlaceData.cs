@@ -6,8 +6,8 @@ using ThingsToDoProject.Model;
 
 namespace ThingsToDoProject.Core.Interface
 {
-    public interface IGetLatitudeLongitude
+    public interface IGetPlaceData
     {
-        LocationAttributes Get(string CityName);
+        Task<List<PlaceAttributes>> GetPlaceData(string PlaceId);
     }
 }
