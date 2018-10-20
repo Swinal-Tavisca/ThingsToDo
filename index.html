@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+    
+<p id="demo"></p>
+<a href="#" id="btn">ThingsToDo</a>
+
+<script>
+var myobj = {"AirportCode":"BOM", "ArrivalDateTime":"11092018061000","DepartureDateTime":"11092018042000","ArrivalTerminal":"4","DepartureTerminal":"2","DurationMinutes":"260"};
+
+    document.getElementById("demo").innerHTML +=  myobj.AirportCode + "<br>";
+    document.getElementById("demo").innerHTML += myobj.ArrivalDateTime+ "<br>";
+    
+    document.getElementById("demo").innerHTML +=  myobj.DepartureDateTime + "<br>";
+    document.getElementById("demo").innerHTML += myobj.ArrivalTerminal+ "<br>";
+    
+    document.getElementById("demo").innerHTML +=  myobj.DepartureTerminal + "<br>";
+    document.getElementById("demo").innerHTML += myobj.DurationMinutes+ "<br>";
+    
+    window.addEventListener("load", function() {
+        
+        document.getElementById("btn").addEventListener("click", function() {
+          
+            document.location.href = "http://localhost:53513/Home?location="+myobj.AirportCode+"&ArrivalDateTime="+myobj.ArrivalDateTime+"&DepartureDateTime="+myobj.DepartureDateTime+"&ArrivalTerminal="+myobj.ArrivalTerminal+"&DepartureTerminal="+myobj.DepartureTerminal+"&DurationMinutes="+myobj.DurationMinutes;
+        });
+    });
+</script>
+</body>
+</html>
