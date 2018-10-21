@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule , MatInputModule,MatCardModule} from "@angular/material";
+import { MatTabsModule,MatSelectModule,MatFormFieldModule,MatAutocompleteModule,MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule , MatInputModule,MatCardModule} from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { AgmCoreModule} from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
@@ -16,6 +16,7 @@ import { MainContentComponent } from './main-content/main-content.component';
 import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReminderComponent } from './reminder/reminder.component';
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,9 @@ import { ReminderComponent } from './reminder/reminder.component';
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    MatTabsModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatSidenavModule,
@@ -38,6 +42,9 @@ import { ReminderComponent } from './reminder/reminder.component';
     MatCardModule,
     FlexLayoutModule,
     MatInputModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatSelectModule,
     AgmCoreModule.forRoot(
       {
         apiKey:'AIzaSyA9v-ByUMauD8TazXdViq_f7RF-EHru86A'

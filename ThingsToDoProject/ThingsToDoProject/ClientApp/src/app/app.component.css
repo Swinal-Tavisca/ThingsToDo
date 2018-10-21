@@ -13,6 +13,10 @@
   border-right-style: solid;
   height: 50%;
 }
+.example-form-field {
+  width: 26em;
+  padding-top: 18px;
+}
 
 /* Highlighting rules for nav menu items */
 a.link-active,
@@ -23,4 +27,18 @@ a.link-active a:focus {
 }
 .space{
   padding-right: 10px;
+}
+.Filter{
+  padding-top: 18px; 
+}
+.example-panel-red .mat-select-panel {
+  background: rgba(255, 0, 0, 0.5);
+}
+
+.example-panel-green .mat-select-panel {
+  background: rgba(0, 255, 0, 0.5);
+}
+
+.example-panel-blue .mat-select-panel {
+  background: rgba(0, 0, 255, 0.5);
 }

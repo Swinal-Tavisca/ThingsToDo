@@ -1,20 +1,28 @@
 <div id="narrow" class="demo-card-container">
   <div *ngFor="let data of response">
     <mat-card class="example-card">
-        <mat-card-header>
-          <mat-icon>more_vert</mat-icon>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Name: {{ data.name }}</mat-card-title>
-          <mat-card-subtitle>Rating : {{ data.rating }}</mat-card-subtitle>
+      <div class="mat-cards">
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+        <div>    
+          <mat-card-header>
+           <mat-card-title>Name: {{ data.name }}</mat-card-title>
+            <mat-card-subtitle>Rating : {{ data.rating }}</mat-card-subtitle>
+          </mat-card-header>
+        </div></div>
+        
           <mat-card-actions>
-              <button mat-button>Get Direction</button>
-              </mat-card-actions>
-        </mat-card-header>
-      </mat-card>
-
-
-      
-  </div><br><br>
+              <a href="#" mat-raised-button>
+                  <mat-icon>directions</mat-icon>
+                  Get Direction
+              </a>
+              <a href="#" mat-raised-button>
+                  <mat-icon>details</mat-icon>
+                  More Info
+              </a>
+          </mat-card-actions>
+        </mat-card>
+        <br>
+  </div>
 </div>
   
   
