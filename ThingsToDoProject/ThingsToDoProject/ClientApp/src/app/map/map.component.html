@@ -1,6 +1,6 @@
 <div id="wide">
   <div *ngIf="isDataLoaded">
-    <agm-map [latitude]="lat" [longitude]="lng" #gm  (mapClick)="closeInfoWindow(infoWindow,gm)">
+    <agm-map [latitude]="lat" [longitude]="lng" #gm [zoom]="zoom" (mapClick)="closeInfoWindow(infoWindow,gm)">
       <agm-marker  [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl"></agm-marker>
         <agm-marker 
         *ngFor="let m of markers ; let i = index"
