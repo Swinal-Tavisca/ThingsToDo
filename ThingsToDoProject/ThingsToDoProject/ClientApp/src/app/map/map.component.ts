@@ -8,7 +8,6 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit{
-  title: string = 'My first AGM project';
   Getresponse:any;
 
   zoom :number = 15;
@@ -82,7 +81,7 @@ response: any;
       
     })
 
-this.http.get('http://localhost:58026/api/Data/insideAirport/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
+this.http.get('http://localhost:58026/api/Data/outsideAirport/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
   subscribe((response)=>
   {
   this.response = response;
