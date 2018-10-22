@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { Airport } from '../airport.service';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +11,35 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  value:any;
+  panelColor = new FormControl('red');
+  airportArea: string = 'InsideOutsideAirport';
+
+  myControl = new FormControl();
+  options: string[] = ['Bar', 'Spa', 'Store'];
+  filteredOptions: Observable<string[]>;
+
+  constructor(public airportServices: Airport) {}
+  
+  ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
+
+  setAirportArea(area) {
+    this.airportServices.setArea(area);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+
+  selected = 'outside';
   isExpanded = false;
 
   collapse() {
@@ -16,11 +49,6 @@ export class HeaderComponent implements OnInit {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
-  constructor(private route: ActivatedRoute) { }
-
-  ngOnInit() {
-    console.log(this.route.snapshot.queryParamMap.has('location'));
-    console.log(this.route.snapshot.queryParamMap.get('location'));
-  }
+  title = 'ClientApp things ';
 
 }

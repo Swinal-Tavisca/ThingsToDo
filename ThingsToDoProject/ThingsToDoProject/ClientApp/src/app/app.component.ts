@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { Airport } from './airport.service';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +13,14 @@ export class AppComponent {
   /* Search */
   value:any;
   panelColor = new FormControl('red');
-  airportArea: string = 'both';
+  airportArea: string = 'InsideOutsideAirport';
 
   myControl = new FormControl();
   options: string[] = ['Bar', 'Spa', 'Store'];
   filteredOptions: Observable<string[]>;
 
+  constructor(public airportServices: Airport) {}
+  
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -26,7 +29,7 @@ export class AppComponent {
   }
 
   setAirportArea(area) {
-    this.airportArea = area;
+    this.airportServices.setArea(area);
   }
 
   private _filter(value: string): string[] {

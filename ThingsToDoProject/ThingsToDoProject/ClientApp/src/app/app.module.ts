@@ -7,6 +7,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { AgmCoreModule} from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { Airport } from './airport.service';
 
 import 'hammerjs';
 import { AppComponent } from './app.component';
@@ -65,7 +66,7 @@ import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
       
     ])
   ],
-  providers: [],
+  providers: [ Airport ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

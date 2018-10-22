@@ -1,7 +1,7 @@
 <div id="wide">
   <div *ngIf="isDataLoaded">
     <agm-map [latitude]="lat" [longitude]="lng" #gm [zoom]="zoom" (mapClick)="closeInfoWindow(infoWindow,gm)">
-      <agm-marker  [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl"></agm-marker>
+      <agm-marker  [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl" ></agm-marker>
         <agm-marker 
         *ngFor="let m of markers ; let i = index"
         [latitude]="m.lat"
@@ -11,7 +11,6 @@
         <agm-info-window [disableAutoPan]="false" #infoWindow>
             <div>
                 {{m.name}}
-                {{m.rating}}
             </div>
         </agm-info-window>
           <!-- <agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true"    [backgroundColor]="'#ADD8E6'"  [border]="true" [borderRadius]="'10px'"  [fontSize]="'100px'" [fontColor]="'#FF0000'" [padding]="'20px'">  

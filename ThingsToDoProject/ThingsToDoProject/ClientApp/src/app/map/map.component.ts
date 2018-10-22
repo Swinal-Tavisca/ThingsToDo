@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Airport } from '../airport.service';
 
 @Component({
   selector: 'app-map',
@@ -54,7 +55,7 @@ type:any;
   arrivalterminal:any;
   departureterminal:any;
 
-constructor(private route: ActivatedRoute, private router: Router , private http: HttpClient) { 
+constructor(public airportServices: Airport,private route: ActivatedRoute, private router: Router , private http: HttpClient) { 
   console.log(this.router.url,"Current URL");
   this.type= this.router.url.substring(1,this.router.url.indexOf('?'));
   this.location = this.route.snapshot.queryParamMap.get('location');
@@ -81,7 +82,7 @@ response: any;
       
     })
 
-this.http.get('http://localhost:51900/api/Data/outsideAirport/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
+this.http.get('http://localhost:51900/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
   subscribe((response)=>
   {
   this.response = response;
