@@ -15,5 +15,12 @@ export class MainContentComponent implements OnInit {
     console.log(this.route.snapshot.queryParamMap.get('location'));
     console.log(this.route.snapshot.queryParamMap.has('time'));
     console.log(this.route.snapshot.queryParamMap.get('time'));
+    this.sideBarIsOpened = true;
   }
+  sideBarIsOpened = false;
+
+  toggleSideBar() {
+    this.sideBarIsOpened = !this.sideBarIsOpened;
+  }
+
 }

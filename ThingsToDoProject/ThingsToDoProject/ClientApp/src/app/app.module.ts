@@ -17,6 +17,7 @@ import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReminderComponent } from './reminder/reminder.component';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
+import { SideBarComponent } from './side-bar/side-bar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
     MainContentComponent,
     MapComponent,
     ReminderComponent,
+    SideBarComponent,
   ],
   imports: [
     BrowserModule,

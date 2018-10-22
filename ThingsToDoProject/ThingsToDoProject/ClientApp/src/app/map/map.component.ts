@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output, EventEmitter, HostListener } from '@angular/core';
+// import { SideBarComponent } from '../side-bar/side-bar.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,6 +9,13 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit{
+  @Output() toggle: EventEmitter<null> = new EventEmitter();
+
+  @HostListener('click')
+  click() {
+    this.toggle.emit();
+  }
+
   Getresponse:any;
 
   zoom :number = 15;
