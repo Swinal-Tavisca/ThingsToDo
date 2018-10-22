@@ -59,8 +59,10 @@ import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
       { path: 'Home',component: MainContentComponent},
       { path: 'restaurant',component: MainContentComponent},
       { path: 'store',component: MainContentComponent},
+      {path:'attractions',component:MainContentComponent},
       { path: '**',redirectTo: '/Home'},
-
+      //{path:'attractions/:selected',component:MainContentComponent},
+      
     ])
   ],
   providers: [],

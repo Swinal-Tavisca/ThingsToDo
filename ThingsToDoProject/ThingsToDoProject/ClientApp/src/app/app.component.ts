@@ -12,6 +12,7 @@ export class AppComponent {
   /* Search */
   value:any;
   panelColor = new FormControl('red');
+  airportArea: string = 'both';
 
   myControl = new FormControl();
   options: string[] = ['Bar', 'Spa', 'Store'];
@@ -24,6 +25,10 @@ export class AppComponent {
     );
   }
 
+  setAirportArea(area) {
+    this.airportArea = area;
+  }
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -31,7 +36,7 @@ export class AppComponent {
   }
 
 
-
+  selected = 'outside';
   isExpanded = false;
 
   collapse() {
