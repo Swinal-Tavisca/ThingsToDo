@@ -42,15 +42,15 @@
               <a (click)="sidenav.toggle()" [routerLink]='["/Home"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>
                   <mat-icon>home</mat-icon> Home
               </a>
+              <div *ngIf="selected=='outside'"><a [routerLink]='["/attractions"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>
+                <mat-icon>store</mat-icon>Attractions
+            </a></div>
               <a (click)="sidenav.toggle()" (click)="Category()"[routerLink]='["/restaurant"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>
                   <mat-icon>store</mat-icon> Restaurant
               </a>
               <a (click)="sidenav.toggle()" [routerLink]='["/store"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>
                   <mat-icon>store</mat-icon> Store
               </a>
-              <div *ngIf="selected=='outside'"><a [routerLink]='["/attractions"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>
-                  <mat-icon>store</mat-icon>Attractions
-              </a></div>
               <button (click)="sidenav.toggle()" mat-raised-button mat-list-item>
                   <mat-icon>notifications</mat-icon>Set Reminder
               </button>

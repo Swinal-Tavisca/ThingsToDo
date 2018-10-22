@@ -75,14 +75,14 @@ response: any;
     this.isDataLoaded=true;
     this.city= this.route.snapshot.queryParamMap.get('location');
     console.log(this.city);
-    this.http.get('http://localhost:51900/api/Data/position/'+this.city).subscribe((response)=>{
+    this.http.get('http://localhost:59953/api/Data/position/'+this.city).subscribe((response)=>{
       this.Getresponse = response;
       this.lat =  this.Getresponse.latitudePosition;
       this.lng=this.Getresponse.longitudePosition;
       
     })
 
-this.http.get('http://localhost:51900/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
+this.http.get('http://localhost:59953/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
   subscribe((response)=>
   {
   this.response = response;
