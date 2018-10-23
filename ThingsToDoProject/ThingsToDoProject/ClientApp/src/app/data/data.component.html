@@ -7,13 +7,14 @@
           <mat-card-header>
            <mat-card-title>Name: {{ data.name }}</mat-card-title>
             <mat-card-subtitle>Rating : {{ data.rating }}</mat-card-subtitle>
+
           </mat-card-header>
         </div></div>
         
           <mat-card-actions>
               <a href="#" mat-raised-button>
                   <mat-icon>directions</mat-icon>
-                  Get Direction
+                  Get Direction{{data.PlaceId}}
               </a>
               <a href="#" mat-raised-button>
                   <mat-icon>details</mat-icon>
@@ -24,5 +25,4 @@
         <br>
   </div>
 </div>
-  
   

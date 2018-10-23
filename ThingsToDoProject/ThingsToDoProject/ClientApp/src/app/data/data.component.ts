@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Airport } from '../airport.service';
@@ -17,6 +17,13 @@ export class DataComponent implements OnInit {
   durationminutes:any;
   arrivalterminal:any;
   departureterminal:any;
+  
+  @Output() toggle: EventEmitter<null> = new EventEmitter();
+
+  @HostListener('click')
+  click() {
+    this.toggle.emit();
+  }
 
   constructor(public airportServices: Airport,private route: ActivatedRoute, private router: Router , private http: HttpClient) { 
     this.type= this.router.url.substring(1,this.router.url.indexOf('?'));
@@ -31,7 +38,7 @@ export class DataComponent implements OnInit {
 }
 
   ngOnInit() {
-    this.http.get('http://localhost:59953/api/Data/'+ this.airportServices.area + '/' + this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
+    this.http.get('http://localhost:55076/api/Data/'+ this.airportServices.area + '/' + this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
     subscribe((response)=>
     {
     this.response = response;

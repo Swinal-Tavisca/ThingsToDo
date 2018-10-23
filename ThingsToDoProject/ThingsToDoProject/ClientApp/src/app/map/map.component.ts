@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Airport } from '../airport.service';
@@ -9,6 +9,14 @@ import { Airport } from '../airport.service';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit{
+
+  @Output() toggle: EventEmitter<null> = new EventEmitter();
+
+  @HostListener('click')
+  click() {
+    this.toggle.emit();
+  }
+  
   Getresponse:any;
 
   zoom :number = 15;
@@ -75,14 +83,14 @@ response: any;
     this.isDataLoaded=true;
     this.city= this.route.snapshot.queryParamMap.get('location');
     console.log(this.city);
-    this.http.get('http://localhost:59953/api/Data/position/'+this.city).subscribe((response)=>{
+    this.http.get('http://localhost:55076/api/Data/position/'+this.city).subscribe((response)=>{
       this.Getresponse = response;
       this.lat =  this.Getresponse.latitudePosition;
       this.lng=this.Getresponse.longitudePosition;
       
     })
 
-this.http.get('http://localhost:59953/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
+this.http.get('http://localhost:55076/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
   subscribe((response)=>
   {
   this.response = response;

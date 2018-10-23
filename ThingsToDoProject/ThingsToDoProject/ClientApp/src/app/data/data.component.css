@@ -16,3 +16,13 @@ display:flex;
 flex-wrap: wrap;
 flex-direction:row;
  }
+ :host {
+    display: inline-block;
+    background: #ccc;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  :host:hover {
+    background: #ddd;
+  }

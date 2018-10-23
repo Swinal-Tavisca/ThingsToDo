@@ -1,4 +1,5 @@
 <div class="flex-container">
-    <div style="background-color: #e6e6e6;" class="Data" queryParamsHandling="preserve"><app-data></app-data></div>
-    <div style="background-color:lightblue;" class="Map" queryParamsHandling="preserve"><app-map></app-map> </div>
+    <div style="background-color: #e6e6e6;" class="Data" queryParamsHandling="preserve"><app-data (toggle)="toggleSideSection()"></app-data></div>
+    <app-side-section [isOpen]="sideSectionIsOpened"></app-side-section>
+    <div style="background-color:lightblue;" class="Map" queryParamsHandling="preserve"><app-map (click)="toggleSideSection()"></app-map> </div>
 </div>
