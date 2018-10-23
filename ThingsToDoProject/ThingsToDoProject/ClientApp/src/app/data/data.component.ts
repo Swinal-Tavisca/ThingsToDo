@@ -41,7 +41,8 @@ export class DataComponent implements OnInit {
     this.http.get('http://localhost:55076/api/Data/'+ this.airportServices.area + '/' + this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
     subscribe((response)=>
     {
-    this.response = response;
+      this.response = response;
+    
     })
 
   }

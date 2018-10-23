@@ -27,11 +27,12 @@ export class MapComponent implements OnInit{
   public origin: any; 
   public destination: any;
  city:string;
-  getDirection(latitude: number,longitude: number) {
+  getDirection(i:number,latitude: number,longitude: number ) {
     console.log(this.Getresponse);
     console.log(this.Getresponse.latitudePosition);
     this.origin = { lat:this.Getresponse.latitudePosition, lng:this.Getresponse.longitudePosition};
     this.destination = { lat: latitude, lng: longitude};
+    console.log(this.response[i].placeID);
   }
   closeInfoWindow(infoWindow,gm)
   {
@@ -94,13 +95,15 @@ this.http.get('http://localhost:55076/api/Data/'+ this.airportServices.area +'/'
   subscribe((response)=>
   {
   this.response = response;
+  
   for(let data in response){
+    //console.log(response[data].placeID)
     this.markers.push({
       lat: Number(response[data].latitude),
       lng: Number(response[data].longitude),
       name:response[data].name,
       rating:response[data].rating,
-
+      
     })
   }
 })
