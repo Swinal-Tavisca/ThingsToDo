@@ -26,3 +26,7 @@ flex-direction:row;
   :host:hover {
     background: #ddd;
   }
+
+  .space{
+    margin-left: 26em;
+  }
