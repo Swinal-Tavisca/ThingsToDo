@@ -13,17 +13,17 @@ using ThingsToDoProject.Core.Translater;
 
 namespace ThingsToDoProject.Core.Provider
 {
-    public class GetDataOfParticularType : IGetData
+    public class GetInsideAirportData : IGetData
     {
         private readonly IHttpClientFactory _httpClientFactory;
         IConfiguration _iconfiguration;
 
-        public GetDataOfParticularType(IHttpClientFactory httpClientFactory , IConfiguration configuration)
+        public GetInsideAirportData(IHttpClientFactory httpClientFactory , IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
             _iconfiguration = configuration;
         }
-        public async Task<List<DataAttributes>> GetData(LocationAttributes Position , String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        public async Task<List<PlaceAttributes>> GetData(LocationAttributes Position , String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
         {
             try
             {
@@ -34,24 +34,18 @@ namespace ThingsToDoProject.Core.Provider
                     var Key = _iconfiguration["GoogleAPI"];
                     //var Url = endpoint.ToString() + "maps/api/place/nearbysearch/json?location=18.579343,73.9089168&radius=1000&type=" + PointOfInterest + "&key=" + Key;
                     var Url = endpoint.ToString() + "maps/api/place/nearbysearch/json?location=" + Position.LatitudePosition + "," + Position.LongitudePosition + "&radius=1000&type=" + PointOfInterest  + "&key=" + Key;
-                var client1 = _httpClientFactory.CreateClient();
+                    var client1 = _httpClientFactory.CreateClient();
                     var response = await client1.GetAsync(Url);
 
                     response.EnsureSuccessStatusCode();
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    ////var finalObject = JsonConvert.DeserializeObject<>(responseBody);
-                    var data = (JObject)JsonConvert.DeserializeObject(responseBody);
-                    var results = data["results"].Value<JArray>();
-                   // List<DataAttributes> Data = _translater.TransalateData(results);
-                    List<DataAttributes> Data = results.TransalateData(PointOfInterest);
-
-
-
+                    RootobjectOfData data = JsonConvert.DeserializeObject<RootobjectOfData>(responseBody);
+                    List<PlaceAttributes> Data = data.results.TransalateData(Key, endpoint);
                 return Data;
             }
             catch(Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             return null;
         }

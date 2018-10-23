@@ -10,6 +10,6 @@ namespace ThingsToDoProject.Core.Interface
 {
     public interface IGetData
     {
-        Task<List<DataAttributes>> GetData(LocationAttributes Position, String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest);
+        Task<List<PlaceAttributes>> GetData(LocationAttributes Position, String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest);
     }
 }

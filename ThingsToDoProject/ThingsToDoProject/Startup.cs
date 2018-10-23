@@ -27,10 +27,11 @@ namespace ThingsToDoProject
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSingleton<IGetLatitudeLongitude, GetLatitudeLongitude>();
-            services.AddSingleton<IGetData, GetDataOfParticularType>();
+            services.AddSingleton<IGetData, GetInsideAirportData>();
             services.AddSingleton<IGetOutsideData, GetOutsideAirportData>();
             services.AddSingleton<IGetInsideOutside, GetInsideOutsideAirportData>();
             services.AddSingleton<IGetPlaceData, GetDataOfParticularPlace>();
+            services.AddSingleton<IGetDistanceTime, GetDistanceTimeOfParticularPlace>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

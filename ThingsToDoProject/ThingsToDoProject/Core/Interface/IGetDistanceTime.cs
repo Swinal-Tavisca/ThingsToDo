@@ -6,8 +6,8 @@ using ThingsToDoProject.Model;
 
 namespace ThingsToDoProject.Core.Interface
 {
-    public interface IGetPlaceData
+    public interface IGetDistanceTime
     {
-        Task<PlaceAttributes> GetPlaceData(string DeparturePlace , string PlaceId);
+        Task<DistanceTimeAttributes> GetDistanceTime(string DeparturePlace, float DestinationLatitude, float DestinationLongitude);
     }
 }

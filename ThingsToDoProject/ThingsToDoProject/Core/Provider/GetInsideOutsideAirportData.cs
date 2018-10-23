@@ -25,11 +25,11 @@ namespace ThingsToDoProject.Core.Provider
             _getInsideData = getInsideData;
 
         }
-        public async Task<List<DataAttributes>> GetInsideOutsideData(LocationAttributes Position, String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        public async Task<List<PlaceAttributes>> GetInsideOutsideData(LocationAttributes Position, String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
         {
 
-            List<DataAttributes> OutsideData = await _getOutsideData.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
-            List<DataAttributes> InsideData = await _getInsideData.GetData(Position, DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
+            List<PlaceAttributes> OutsideData = await _getOutsideData.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
+            List<PlaceAttributes> InsideData = await _getInsideData.GetData(Position, DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
 
             for (int index = 0; index < InsideData.Count; index++)
             {

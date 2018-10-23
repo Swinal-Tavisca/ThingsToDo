@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,40 +11,34 @@ using ThingsToDoProject.Model;
 
 namespace ThingsToDoProject.Core.Provider
 {
-    public class GetDataOfParticularPlace : IGetPlaceData
+    public class GetDistanceTimeOfParticularPlace : IGetDistanceTime
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IGetDistanceTime _getDistanceTime;
         private readonly IGetLatitudeLongitude _getLatitudeLongitude;
         IConfiguration _iconfiguration;
 
-        public GetDataOfParticularPlace(IHttpClientFactory httpClientFactory, IConfiguration configuration, IGetDistanceTime getDistanceTime, IGetLatitudeLongitude getLatitudeLongitude)
+        public GetDistanceTimeOfParticularPlace(IHttpClientFactory httpClientFactory, IConfiguration configuration, IGetLatitudeLongitude getLatitudeLongitude)
         {
             _httpClientFactory = httpClientFactory;
             _iconfiguration = configuration;
-            _getDistanceTime = getDistanceTime;
             _getLatitudeLongitude = getLatitudeLongitude;
         }
-        public async Task<PlaceAttributes> GetPlaceData(string DeparturePlace , string PlaceId)
+        public async Task<DistanceTimeAttributes> GetDistanceTime(string DeparturePlace,float DestinationLatitude , float DestinationLongitude)
         {
             try
             {
-                //using (HttpClient client = new HttpClient())
-                //{
+                LocationAttributes SourcePosition = _getLatitudeLongitude.Get(DeparturePlace);
                 var client = _httpClientFactory.CreateClient("GoogleClient");
                 Uri endpoint = client.BaseAddress; // Returns GoogleApi
                 var Key = _iconfiguration["GoogleAPI"];
-                var Url = endpoint.ToString() + "maps/api/place/details/json?placeid=" + PlaceId + "&key=" + Key;
+                var Url = endpoint.ToString() + "maps/api/directions/json?origin=" + SourcePosition.LatitudePosition + "," + SourcePosition.LongitudePosition + "&destination="+ DestinationLatitude +","+ DestinationLongitude + " &key=" + Key;
                 var client1 = _httpClientFactory.CreateClient();
                 var response = await client1.GetAsync(Url);
 
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                Rootobject data = JsonConvert.DeserializeObject<Rootobject>(responseBody);
-                PlaceAttributes Data = data.result.TransalatePlaceData(Key, endpoint);
-                DistanceTimeAttributes Journey = await _getDistanceTime.GetDistanceTime(DeparturePlace, Data.Latitude, Data.Longitude);
-                Data.Distance = Journey.Distance;
-                Data.Duration = Journey.Duration;
+                RootobjectOfDirection data = JsonConvert.DeserializeObject<RootobjectOfDirection>(responseBody);
+                DistanceTimeAttributes Data = data.routes.TransalateDistanceTime();
                 return Data;
             }
             catch (Exception e)
@@ -55,4 +48,5 @@ namespace ThingsToDoProject.Core.Provider
             return null;
         }
     }
+    
 }

@@ -23,7 +23,7 @@ namespace ThingsToDoProject.Core.Provider
             _iconfiguration = configuration;
 
         }
-        public async Task<List<DataAttributes>> GetAllData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        public async Task<List<PlaceAttributes>> GetAllData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
         {
             try
             {
@@ -34,27 +34,17 @@ namespace ThingsToDoProject.Core.Provider
                 var Url = endpoint.ToString() + "maps/api/place/textsearch/json?query=" + PointOfInterest + "+in+" + DeparturePlace + "&language=en&key=" + Key;
 
                 var _client = _httpClientFactory.CreateClient();
-                try
-                {
-                    var response = await _client.GetAsync(Url);
-                    response.EnsureSuccessStatusCode();
-                    string responseBody = await response.Content.ReadAsStringAsync();
+                var response = await _client.GetAsync(Url);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                RootobjectOfData data = JsonConvert.DeserializeObject<RootobjectOfData>(responseBody);
+                List<PlaceAttributes> Data = data.results.TransalateData(Key, endpoint);
 
-                    var data = (JObject)JsonConvert.DeserializeObject(responseBody);
-
-                    var results = data["results"].Value<JArray>();
-                    List<DataAttributes> Data = results.TransalateData(PointOfInterest);
-
-                    return Data;
-                }
-                catch (Exception e)
-                {
-
-                }
+                  return Data;
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-                
+                Console.WriteLine(e.Message);
             }
             return null;
         }

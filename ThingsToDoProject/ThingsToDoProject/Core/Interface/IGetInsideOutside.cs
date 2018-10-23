@@ -8,6 +8,6 @@ namespace ThingsToDoProject.Core.Interface
 {
     public interface IGetInsideOutside
     {
-        Task<List<DataAttributes>> GetInsideOutsideData(LocationAttributes Position, String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest);
+        Task<List<PlaceAttributes>> GetInsideOutsideData(LocationAttributes Position, String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest);
     }
 }

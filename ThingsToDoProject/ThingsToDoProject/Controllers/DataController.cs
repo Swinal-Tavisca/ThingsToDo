@@ -19,14 +19,17 @@ namespace ThingsToDoProject.Controllers
         private readonly IGetLatitudeLongitude _getLatitudeLongitude;
         private readonly IGetInsideOutside _getInsideOutsideData;
         private readonly IGetPlaceData _getPlaceData;
-        public DataController(IGetOutsideData getAllData, IGetData getData, IGetLatitudeLongitude getLatitudeLongitude, IGetInsideOutside getInsideOutsideData, IGetPlaceData getPlaceData)
+        private readonly IGetDistanceTime _getDistanceTime;
+        public DataController(IGetOutsideData getAllData, IGetData getData, IGetLatitudeLongitude getLatitudeLongitude, IGetInsideOutside getInsideOutsideData, IGetPlaceData getPlaceData, IGetDistanceTime getDistanceTime)
         {
             _getAllData = getAllData;
             _getData = getData;
             _getLatitudeLongitude = getLatitudeLongitude;
             _getInsideOutsideData = getInsideOutsideData;
             _getPlaceData = getPlaceData;
+            _getDistanceTime = getDistanceTime;
         }
+
         //GET: api/Data/outsideAirport
         [HttpGet("outsideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}")]
         public async Task<IActionResult> GetOutsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
@@ -64,16 +67,8 @@ namespace ThingsToDoProject.Controllers
             else
                 return BadRequest("Not Found");
         }
-        //GET: api/Data/InsideOutsideAirport
-        [HttpGet("place/{PlaceId}")]
-        public async Task<IActionResult> GetInfoOfParticularPlace(String PlaceID)
-        {
-            var Data = await _getPlaceData.GetPlaceData(PlaceID);
-            if (Data != null)
-                return Ok(Data);
-            else
-                return BadRequest("Not Found");
-        }
+
+        
         //GET: api/Data/position
         [HttpGet("position/{Location}")]
         public LocationAttributes GetPosition(string Location)
@@ -81,6 +76,38 @@ namespace ThingsToDoProject.Controllers
             LocationAttributes Position = _getLatitudeLongitude.Get(Location);
             return Position;
         }
+
+        //GET: api/Data/place
+        [HttpGet("place/{DeparturePlace}/{PlaceId}")]
+        public async Task<IActionResult> GetInfoOfParticularPlace(string DeparturePlace,string PlaceID)
+        {
+            var Data = await _getPlaceData.GetPlaceData(DeparturePlace,PlaceID);
+            if (Data != null)
+                return Ok(Data);
+            else
+                return BadRequest("Not Found");
+        }
+
+        ////GET: api/Data/distancetime
+        //[HttpGet("distancetime/{DeparturePlace}/{DestinationPosition}")]
+        //public async Task<IActionResult> GetDistanceTimeParticularPoints(String DeparturePlace,string DestinationPosition)
+        //{
+        //    LocationAttributes Position = _getLatitudeLongitude.Get(DeparturePlace + "Airport");
+        //    var Data = await _getDistanceTime.GetDistanceTime(Position, DestinationPosition);
+        //    if (Data != null)
+        //        return Ok(Data);
+        //    else
+        //        return BadRequest("Not Found");
+        //}
+
+        ////GET: api/Data/placeAndDistanceTime
+        //[HttpGet("placeAndDIstanceTime/{placeId}/{DeparturePlace}/{DestinationPosition}")]
+        //public async Task<IActionResult> GetPlaceAndDistanceTime(String PlaceID, String DeparturePlace, string DestinationPosition)
+        //{
+
+        //}
+
+
         //// GET: api/Data
         //[HttpGet]
         //public IEnumerable<string> Get()
