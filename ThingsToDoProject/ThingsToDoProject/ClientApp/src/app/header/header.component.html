@@ -8,23 +8,23 @@
                 <span>Let's Explore</span>
                 <mat-icon>flight_land</mat-icon>
                 <span class="example-spacer"></span>
-                    <mat-form-field class="example-form-field">
-                            <input matInput placeholder="Search" matInput [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="value" #inputid>
-                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                      {{option}}
-                                    </mat-option>
-                                  </mat-autocomplete>
-                                  <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                                        <mat-icon>close</mat-icon>
-                                      </button>
-                                      <a (click)='check()' [routerLink]='["/"+value]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>  <mat-icon matSuffix >search</mat-icon></a>
-                                         
-                                     
-                                     
-                                          
-                  
-                          </mat-form-field>
+                <mat-form-field class="example-form-field">
+                        <input matInput placeholder="Search" matInput [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="value">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                  {{option}}
+                                </mat-option>
+                              </mat-autocomplete>
+                              <div class="example-button-row">
+                              <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                                    <mat-icon>close</mat-icon>
+                                  </button>
+                                  
+                        <button mat-icon-button class="searchbutton" (click)='check()' [routerLink]='["/"+value]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>
+                            <mat-icon matSuffix>search</mat-icon>
+                        </button>
+                    </div>
+                      </mat-form-field>
                       <span class="example-spacer"></span>
                       <mat-form-field>
                         <mat-select [(value)]="selected">

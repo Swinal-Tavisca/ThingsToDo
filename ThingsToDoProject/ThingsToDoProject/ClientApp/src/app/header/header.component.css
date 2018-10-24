@@ -43,3 +43,6 @@
     background: rgba(0, 0, 255, 0.5);
   }
   
+.example-button-row  {
+  padding-left: 25em;
+}

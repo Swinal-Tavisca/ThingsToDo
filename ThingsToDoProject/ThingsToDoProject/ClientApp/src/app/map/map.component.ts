@@ -31,13 +31,10 @@ data:any;
   }
   getDataOfParticularPlace(marker:any,placeid:string)
   {
-    console.log(this.location);
-    console.log(placeid);
     this.http.get('http://localhost:49542/api/Data/place/'+ this.location + '/'+ placeid )
     .subscribe((response) => {
       this.res=response;
       marker.image=this.res.image;
-      console.log(marker.image);
     })
   }
 
@@ -89,7 +86,6 @@ response: any;
       placeID:response[data].placeID,
       image:""
     })
-    console.log(this.response);
     this.dataService.response=this.response;
   }
 })
