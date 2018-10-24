@@ -19,6 +19,7 @@ export class DataComponent implements OnInit {
   departureterminal:any;
   
   @Output() toggle: EventEmitter<null> = new EventEmitter();
+  @Output() info: EventEmitter<string> = new EventEmitter<string>();
 
   @HostListener('click')
   click() {
@@ -42,8 +43,13 @@ export class DataComponent implements OnInit {
     subscribe((response)=>
     {
       this.response = response;
-    
+    console.log(response);
     })
 
+  }
+
+  MoreInfo(placeid: string) {
+    console.log(placeid);
+    this.info.emit(placeid);
   }
 }

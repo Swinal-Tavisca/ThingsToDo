@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./main-content.component.css']
 })
 export class MainContentComponent implements OnInit {
-
+  PlaceId: string;
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -21,5 +21,11 @@ export class MainContentComponent implements OnInit {
 
   toggleSideSection() {
     this.sideSectionIsOpened = !this.sideSectionIsOpened;
+  }
+
+  MoreInfo(Id: string){
+    console.log("mainnnn");
+    console.log(Id);
+    this.PlaceId = Id;
   }
 }

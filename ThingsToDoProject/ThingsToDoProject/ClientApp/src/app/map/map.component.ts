@@ -95,7 +95,6 @@ this.http.get('http://localhost:49542/api/Data/'+ this.airportServices.area +'/'
   subscribe((response)=>
   {
   this.response = response;
-  
   for(let data in response){
     //console.log(response[data].placeID)
     this.markers.push({

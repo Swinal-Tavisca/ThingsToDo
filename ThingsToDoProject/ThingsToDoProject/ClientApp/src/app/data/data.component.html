@@ -7,10 +7,12 @@
           <mat-card-header>
            <mat-card-title>Name: {{ data.name }}</mat-card-title>
             <mat-card-subtitle>Rating : {{ data.rating }}</mat-card-subtitle>
-            
           </mat-card-header>
           <div class="space">
-            <mat-icon>arrow_forward_ios</mat-icon>
+            <!-- <a (click)="MoreInfo({{data.placeID}})">
+              <mat-icon>arrow_forward_ios</mat-icon>
+          </a> -->
+          <button type="button" (click)="MoreInfo(data.placeID)"><mat-icon>arrow_forward_ios</mat-icon></button>
           </div>
         </div>
       </div>

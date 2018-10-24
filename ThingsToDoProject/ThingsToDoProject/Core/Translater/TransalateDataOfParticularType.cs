@@ -19,8 +19,8 @@ namespace ThingsToDoProject.Core.Translater
                 //DataDetails.Add(new PlaceAttributes
                 //{
                 PlaceAttributes data = new PlaceAttributes();
-                data.Name = results[Index].name == null ? null : results[Index].name;
-                data.Address = results[Index].formatted_address == null ? null : results[Index].formatted_address;
+                data.Name = results[Index].name ?? results[Index].name;
+                data.Address = results[Index].formatted_address ?? results[Index].formatted_address;
                 data.OpenClosedStatus = results[Index].opening_hours == null ? false : results[Index].opening_hours.open_now;
                 data.Image = results[Index].photos == null ? null : Url + "maps/api/place/photo?maxwidth=400&photoreference=" + results[Index].photos[0].photo_reference + "&key=" + Key;
                 data.PlaceID = results[Index].place_id == null ? null : results[Index].place_id;
