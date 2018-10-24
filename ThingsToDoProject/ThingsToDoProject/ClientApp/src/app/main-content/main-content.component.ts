@@ -24,8 +24,6 @@ export class MainContentComponent implements OnInit {
   }
 
   MoreInfo(Id: string){
-    console.log("mainnnn");
-    console.log(Id);
     this.PlaceId = Id;
   }
 }

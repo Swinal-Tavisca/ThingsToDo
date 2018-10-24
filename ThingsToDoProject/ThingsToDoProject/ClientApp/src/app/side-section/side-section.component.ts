@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./side-section.component.css']
 })
 export class SideSectionComponent implements OnInit {
-  @Input() PlaceId: string="null";
+  @Input() PlaceId: string=null;
   location:string;
   response: any;
 
@@ -20,16 +20,17 @@ export class SideSectionComponent implements OnInit {
 
 
   ngOnChanges(){
-    debugger;
-  console.log(this.PlaceId);
-  if(this.PlaceId!="null"){
+  if(this.PlaceId!=null){
+    this.GetAllDataOfParticularPlace();
+  }
+}
+
+GetAllDataOfParticularPlace(){
   this.http.get('http://localhost:49542/api/Data/place/'+ this.location + '/'+this.PlaceId ).
   subscribe((response)=>
   {
     this.response = response;
-  console.log(response);
   })
-  }
 }
   ngOnInit() {
   }

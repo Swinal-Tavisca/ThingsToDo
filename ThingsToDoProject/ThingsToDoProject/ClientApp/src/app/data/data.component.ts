@@ -49,7 +49,6 @@ export class DataComponent implements OnInit {
   }
 
   MoreInfo(placeid: string) {
-    console.log(placeid);
     this.info.emit(placeid);
   }
 }
