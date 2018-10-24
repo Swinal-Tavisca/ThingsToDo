@@ -76,6 +76,9 @@ constructor(public airportServices: Airport,private route: ActivatedRoute, priva
   console.log(this.arrivalterminal);
   console.log(this.departureterminal);
 }
+ConvertString(value){
+  return parseFloat(value)
+  }
 markers: Array<marker>=[];
 response: any;
  
@@ -86,8 +89,8 @@ response: any;
     console.log(this.city);
     this.http.get('http://localhost:49542/api/Data/position/'+this.city).subscribe((response)=>{
       this.Getresponse = response;
-      this.lat =  this.Getresponse.latitudePosition;
-      this.lng=this.Getresponse.longitudePosition;
+      this.lat =  parseFloat(this.Getresponse.latitudePosition);
+      this.lng=parseFloat(this.Getresponse.longitudePosition);
       
     })
 
@@ -98,8 +101,8 @@ this.http.get('http://localhost:49542/api/Data/'+ this.airportServices.area +'/'
   for(let data in response){
     //console.log(response[data].placeID)
     this.markers.push({
-      lat: Number(response[data].latitude),
-      lng: Number(response[data].longitude),
+      lat: this.ConvertString(response[data].latitude),
+      lng: this.ConvertString(response[data].longitude),
       name:response[data].name,
       rating:response[data].rating,
       

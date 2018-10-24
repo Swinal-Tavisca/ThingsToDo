@@ -1,6 +1,12 @@
 
-  <div *ngIf="response">
-    <img src={{response.image}}>
-  {{response.name}}
+  <div *ngIf="response;then content else other_content">
 </div>
-
+<ng-template #content>
+    <img src={{response.image}}><br>
+    Name: {{response.name}}<br>
+    Open Detail:{{response.weekDaysDetail}}<br>
+    Duration: {{response.duration}}<br>
+    Distance: {{response.distance}}<br>
+  </ng-template>
+  <ng-template #other_content>
+      MoreInfo is Not Available for This Place</ng-template>

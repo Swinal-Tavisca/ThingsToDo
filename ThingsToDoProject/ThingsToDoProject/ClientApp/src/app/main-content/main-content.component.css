@@ -2,17 +2,13 @@
   display: flex;
   flex-wrap: wrap;
   background-color: DodgerBlue;
-  width:100%;
-  max-height: 85vh;
-  background-size:cover;
-  overflow:hidden;
-
-
+  overflow: hidden;
 }
 .Data {
   /*border: 1px solid red;*/
   display:flex;
   width: 35%;
+  height: 837px;
   text-align: center;
   font-size: 13px; 
   flex-grow: 1;
@@ -22,6 +18,7 @@
 .Map {
   /*border: 1px solid red;*/
   width: 65%;
+  height: 837px;
   text-align: center;
   font-size: 13px;
 }
