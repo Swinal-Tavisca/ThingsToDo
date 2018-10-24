@@ -1,4 +1,4 @@
-<div id="wide">
+<!-- <div id="wide">
   <div *ngIf="isDataLoaded">
     <agm-map [latitude]="lat" [longitude]="lng" #gm [zoom]="zoom" (mapClick)="closeInfoWindow(infoWindow,gm)">
       <agm-marker  [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl" ></agm-marker>
@@ -20,10 +20,37 @@
                   {{m.rating}}</mat-card>
               
             </ng-template>
-          </agm-snazzy-info-window>  -->          
+          </agm-snazzy-info-window>           
           <agm-direction [origin]=origin [destination]=destination [renderOptions]="renderOptions" >
         </agm-direction> 
     </agm-marker>
     </agm-map>
   </div> 
-</div>
+</div> -->
+
+<div id="wide">
+    <div *ngIf="isDataLoaded">
+       <agm-map [latitude]="lat" [longitude]="lng" #gm [zoom]="zoom">
+        <agm-marker  [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl" ></agm-marker>
+          <agm-marker 
+          *ngFor="let m of dataService.response ; let i = index"
+          [latitude]="m.latitude"
+          [longitude]="m.longitude"
+          (markerClick)="getDirection(m.latitude,m.longitude)"
+          (markerClick)="getDataOfParticularPlace(m,m.placeID)"
+         > 
+         
+            <agm-snazzy-info-window  [closeWhenOthersOpen]="true">  
+              <ng-template>
+                  <img class="place-image" src={{m.image}} alt="imagggee"/>
+                  {{m.name}}
+              </ng-template>
+            </agm-snazzy-info-window>           
+            <agm-direction [origin]="origin" [destination]="destination" [renderOptions]="renderOptions" >
+          </agm-direction> 
+      </agm-marker>
+      </agm-map>
+    </div> 
+  </div>
+  
+  

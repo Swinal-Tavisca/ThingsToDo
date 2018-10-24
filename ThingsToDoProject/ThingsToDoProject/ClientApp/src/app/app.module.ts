@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReminderComponent } from './reminder/reminder.component';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { SideSectionComponent } from './side-section/side-section.component';
+import { DataService } from './dataService.service';
 
 @NgModule({
   declarations: [
@@ -62,14 +63,14 @@ import { SideSectionComponent } from './side-section/side-section.component';
       { path: '',redirectTo: '/Home', pathMatch: 'full' },
       { path: 'Home',component: MainContentComponent},
       { path: 'restaurant',component: MainContentComponent},
-      { path: 'store',component: MainContentComponent},
+      { path: 'shops',component: MainContentComponent},
       {path:'attractions',component:MainContentComponent},
-      { path: '**',redirectTo: '/Home'},
-      //{path:'attractions/:selected',component:MainContentComponent},
+       {path:':value',component:MainContentComponent},
+      { path: '**',redirectTo: '/Home'}
       
     ])
   ],
-  providers: [ Airport ],
+  providers: [ Airport,DataService  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

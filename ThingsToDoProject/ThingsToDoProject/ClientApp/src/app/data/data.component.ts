@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Airport } from '../airport.service';
+import { DataService } from '../dataService.service';
 
 @Component({
   selector: 'app-data',
@@ -26,7 +27,7 @@ export class DataComponent implements OnInit {
     this.toggle.emit();
   }
 
-  constructor(public airportServices: Airport,private route: ActivatedRoute, private router: Router , private http: HttpClient) { 
+  constructor(public airportServices: Airport,private route: ActivatedRoute, private router: Router , private http: HttpClient,public dataService: DataService) { 
     this.type= this.router.url.substring(1,this.router.url.indexOf('?'));
     this.location = this.route.snapshot.queryParamMap.get('location');
     this.arrivalDatetime = this.route.snapshot.queryParamMap.get('ArrivalDateTime');
@@ -45,7 +46,7 @@ export class DataComponent implements OnInit {
       this.response = response;
     console.log(response);
     })
-
+    this.dataService.response=this.response;
   }
 
   MoreInfo(placeid: string) {

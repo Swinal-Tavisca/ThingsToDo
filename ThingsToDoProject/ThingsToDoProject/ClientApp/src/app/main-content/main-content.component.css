@@ -7,7 +7,7 @@
 .Data {
   /*border: 1px solid red;*/
   display:flex;
-  width: 35%;
+  width: 30%;
   height: 837px;
   text-align: center;
   font-size: 13px; 
@@ -17,7 +17,7 @@
 }
 .Map {
   /*border: 1px solid red;*/
-  width: 65%;
+  width: 70%;
   height: 837px;
   text-align: center;
   font-size: 13px;
