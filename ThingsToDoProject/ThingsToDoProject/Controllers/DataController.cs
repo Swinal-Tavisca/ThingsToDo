@@ -20,7 +20,8 @@ namespace ThingsToDoProject.Controllers
         private readonly IGetInsideOutside _getInsideOutsideData;
         private readonly IGetPlaceData _getPlaceData;
         private readonly IGetDistanceTime _getDistanceTime;
-        public DataController(IGetOutsideData getAllData, IGetData getData, IGetLatitudeLongitude getLatitudeLongitude, IGetInsideOutside getInsideOutsideData, IGetPlaceData getPlaceData, IGetDistanceTime getDistanceTime)
+        private readonly ISetReminder _setReminderData;
+        public DataController(IGetOutsideData getAllData, IGetData getData, IGetLatitudeLongitude getLatitudeLongitude, IGetInsideOutside getInsideOutsideData, IGetPlaceData getPlaceData, IGetDistanceTime getDistanceTime,ISetReminder setReminderData)
         {
             _getAllData = getAllData;
             _getData = getData;
@@ -28,6 +29,7 @@ namespace ThingsToDoProject.Controllers
             _getInsideOutsideData = getInsideOutsideData;
             _getPlaceData = getPlaceData;
             _getDistanceTime = getDistanceTime;
+            _setReminderData = setReminderData;
         }
 
         //GET: api/Data/outsideAirport
@@ -86,6 +88,12 @@ namespace ThingsToDoProject.Controllers
                 return Ok(Data);
             else
                 return BadRequest("Not Found");
+        }
+        [HttpPut ("reminder/{phoneNumber}/{placeId}/{name}/{distance}/{storeNumber}/{GoogleUrl}")]
+        public void SetReminder(string phoneNumber,string placeId,string name,string distance,string storeNumber,string GoogleUrl)
+        {
+            
+            _setReminderData.SetReminderForIternary(phoneNumber,placeId,name, distance,storeNumber,GoogleUrl);
         }
 
         ////GET: api/Data/distancetime
