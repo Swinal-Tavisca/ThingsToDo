@@ -17,7 +17,12 @@ export class SideSectionComponent implements OnInit {
     this.location = this.route.snapshot.queryParamMap.get('location');
   }
 
-
+  SetReminder(){
+    this.http.get('http://localhost:49542/api/Data/reminder/' + this.response.phoneNumber + '/')
+    .subscribe(
+      error => console.log("Error with Twillio",error),
+    );
+  }
 
   ngOnChanges(){
   if(this.PlaceId!=null){
@@ -27,7 +32,7 @@ export class SideSectionComponent implements OnInit {
 }
 
 GetAllDataOfParticularPlace(){
-  this.http.get('http://localhost:49542/api/Data/place/'+ this.location + '/'+this.PlaceId )
+  this.http.get('http://localhost:50298/api/Data/place/'+ this.location + '/'+this.PlaceId )
   .subscribe(
     data => this.response=data,
     error => this.response=false,
@@ -46,4 +51,5 @@ GetAllDataOfParticularPlace(){
   }
   @HostBinding('class.is-open') @Input()
   isOpen = false;
+
 }

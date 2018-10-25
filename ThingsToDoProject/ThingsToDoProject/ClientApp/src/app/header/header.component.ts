@@ -45,16 +45,23 @@ export class HeaderComponent implements OnInit {
       map(value => this._filter(value))
     );
   }
-
+  SetReminder(){
+    this.http.get('http://localhost:50298/api/Data/reminder/' + this.phonenumber + '/')
+    .subscribe();
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverview, {
       width: '250px',
       data: {phonenumber: this.phonenumber}
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.phonenumber = result;
+      console.log(this.phonenumber);
+      //window.open("https://wa.me/14155238886?text=join%20lemon-mule");
+      this.SetReminder();
     });
   }
 
@@ -79,7 +86,7 @@ export class HeaderComponent implements OnInit {
      this.DepartureDateTime = this.route.snapshot.queryParamMap.get('DepartureDateTime');
      this.arrivalterminal = this.route.snapshot.queryParamMap.get('ArrivalTerminal');
      this.departureterminal = this.route.snapshot.queryParamMap.get('DepartureTerminal');
-     this.http.get('http://localhost:52181/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.airportServices.getInput()).
+     this.http.get('http://localhost:50298/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.airportServices.getInput()).
    subscribe((response)=>
    {
      this.response=response;
