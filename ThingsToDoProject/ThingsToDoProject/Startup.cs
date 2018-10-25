@@ -32,6 +32,7 @@ namespace ThingsToDoProject
             services.AddSingleton<IGetInsideOutside, GetInsideOutsideAirportData>();
             services.AddSingleton<IGetPlaceData, GetDataOfParticularPlace>();
             services.AddSingleton<IGetDistanceTime, GetDistanceTimeOfParticularPlace>();
+            services.AddSingleton<ISetReminder, SetReminder>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
