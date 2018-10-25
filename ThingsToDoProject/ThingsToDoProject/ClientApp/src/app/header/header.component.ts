@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit {
       console.log('The dialog was closed');
       this.phonenumber = result;
       console.log(this.phonenumber);
-      //window.open("https://wa.me/14155238886?text=join%20lemon-mule");
+      window.open("https://wa.me/14155238886?text=join%20lemon-mule");
       this.SetReminder();
     });
   }

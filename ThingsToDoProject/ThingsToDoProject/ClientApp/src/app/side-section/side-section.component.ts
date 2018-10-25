@@ -18,7 +18,7 @@ export class SideSectionComponent implements OnInit {
   }
 
   SetReminder(){
-    this.http.get('http://localhost:49542/api/Data/reminder/' + this.response.phoneNumber + '/')
+    this.http.get('http://localhost:50298/api/Data/reminder/' + this.response.phoneNumber + '/')
     .subscribe(
       error => console.log("Error with Twillio",error),
     );

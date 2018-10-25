@@ -58,7 +58,25 @@ Week Days
 
 </p>
 <br>
-<b>Reviews:</b><br>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Set Reminder
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-icon>notifications</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-form-field>
+      <input matInput placeholder="Mobile Number">
+    </mat-form-field>
+    <button mat-button>Ok</button>
+  </mat-expansion-panel>
+  </mat-accordion>
+  <br>
+<b>Reviews:</b>
+<br>
 
 <div *ngFor ="let review of response.reviews">
 
@@ -94,15 +112,13 @@ Rating: {{review.rating}}<br>
 
 </mat-card-content>
 
-<mat-card-actions>
-
-<button mat-raised-button mat-list-item (click)="SetReminder()">
+<!-- <button mat-raised-button mat-list-item (click)="openDialog()">
 
 <mat-icon>notifications</mat-icon>Set Reminder
 
-</button>
+</button> -->
 
-</mat-card-actions>
+
 
 </mat-card>
 
