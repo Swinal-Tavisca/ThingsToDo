@@ -15,16 +15,17 @@
                                   {{option}}
                                 </mat-option>
                               </mat-autocomplete>
+                            </mat-form-field>
                               <div class="example-button-row">
                               <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                                     <mat-icon>close</mat-icon>
                                   </button>
                                   
-                        <button mat-icon-button class="searchbutton" (click)='check()' [routerLink]='["/"+value]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>
+                        <button mat-mini-fab class="searchbutton" (click)='check()' [routerLink]='["/"+value]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>
                             <mat-icon matSuffix>search</mat-icon>
                         </button>
                     </div>
-                      </mat-form-field>
+                     
                       <span class="example-spacer"></span>
                       <mat-form-field>
                         <mat-select [(value)]="selected">

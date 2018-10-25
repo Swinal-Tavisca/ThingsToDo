@@ -14,8 +14,8 @@
     height: 50%;
   }
   .example-form-field {
-    width: 26em;
-    padding-top: 18px;
+ width:30%;
+ height: 141.5%;
   }
   
   /* Highlighting rules for nav menu items */
@@ -43,6 +43,3 @@
     background: rgba(0, 0, 255, 0.5);
   }
   
-.example-button-row  {
-  padding-left: 25em;
-}
