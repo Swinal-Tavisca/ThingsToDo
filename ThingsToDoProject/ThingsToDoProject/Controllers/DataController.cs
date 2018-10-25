@@ -89,13 +89,13 @@ namespace ThingsToDoProject.Controllers
             else
                 return BadRequest("Not Found");
         }
-        [HttpPut("reminder/{phoneNumber}/{placeId}/{name}/{distance}/{storeNumber}/{GoogleUrl}")]
+        [HttpGet("reminder/{phoneNumber}/{placeId}/{name}/{distance}/{storeNumber}/{GoogleUrl}")]
         public void SetReminder(string phoneNumber, string placeId, string name, string distance, string storeNumber, string GoogleUrl)
         {
 
             _setReminderData.SetReminderForIternary(phoneNumber, placeId, name, distance, storeNumber, GoogleUrl);
         }
-        [HttpPut("reminder/{phoneNumber}")]
+        [HttpGet("reminder/{phoneNumber}")]
         public void SetReminder(string phoneNumber)
         {
             _setReminderData.SetReminderForAll(phoneNumber);

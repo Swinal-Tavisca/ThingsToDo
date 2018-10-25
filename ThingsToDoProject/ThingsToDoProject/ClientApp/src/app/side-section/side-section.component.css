@@ -15,5 +15,17 @@
     display: block;
   }
   img{
+
     width: 280px;
-  }
+    
+    }
+    
+    .example-card{
+    
+    overflow-y: auto;
+    
+    overflow-x: hidden;
+    
+    height: 76vh;
+    
+    }
