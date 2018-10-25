@@ -43,16 +43,16 @@ data:any;
       this.res=response;
       marker.image=this.res.image;
       this.loader = false;
-    //  debugger
+    
     },
     error=>{
       if(error.status==400)
       {
         marker.image = this.image;
-        debugger;
+       
       }
       this.loader = false;
-     // debugger
+    
     })
   
   }

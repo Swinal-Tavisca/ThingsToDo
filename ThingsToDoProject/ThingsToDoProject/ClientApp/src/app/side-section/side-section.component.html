@@ -1,8 +1,4 @@
-<div *ngIf="response;then content else other_content">
-
-</div>
-
-<ng-template #content>
+<div  *ngIf ="response">
 
 <mat-card class="example-card">
 
@@ -69,9 +65,9 @@ Week Days
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-form-field>
-      <input matInput placeholder="Mobile Number">
+      <input matInput placeholder="Mobile Number" [(ngModel)]="value">
     </mat-form-field>
-    <button mat-button>Ok</button>
+    <button mat-button (click)="SetReminder()">Ok</button>
   </mat-expansion-panel>
   </mat-accordion>
   <br>
@@ -121,10 +117,5 @@ Rating: {{review.rating}}<br>
 
 
 </mat-card>
-
-</ng-template>
-
-<ng-template #other_content>
-
-MoreInfo is Not Available for This Place</ng-template>
-
+</div>
+<img *ngIf="loader" class="loader" src="../src/assets/images/loader.gif">
