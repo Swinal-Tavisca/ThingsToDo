@@ -40,7 +40,7 @@ export class DataComponent implements OnInit {
 }
 
   ngOnInit() {
-    this.http.get('http://localhost:49542/api/Data/'+ this.airportServices.area + '/' + this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
+    this.http.get('http://localhost:52181/api/Data/'+ this.airportServices.area + '/' + this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.type).
     subscribe((response)=>
     {
       this.response = response;
