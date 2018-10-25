@@ -6,6 +6,12 @@ import {map, startWith} from 'rxjs/operators';
 import { Airport } from '../airport.service';
 import { DataService } from '../dataService.service';
 import { HttpClient } from '@angular/common/http';
+import {Inject} from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
+export interface DialogData {
+  phonenumber:number;
+}
 
 @Component({
   selector: 'app-header',
@@ -13,7 +19,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  phonenumber:number;
   value:any;
   response:any;
   panelColor = new FormControl('red');
@@ -31,13 +37,25 @@ export class HeaderComponent implements OnInit {
   arrivalterminal:any;
   departureterminal:any;
 
-  constructor(public airportServices: Airport,private route: ActivatedRoute,private http: HttpClient, public dataService: DataService) {}
+  constructor(public airportServices: Airport,private route: ActivatedRoute,private http: HttpClient, public dataService: DataService,public dialog: MatDialog) {}
   
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogOverview, {
+      width: '250px',
+      data: {phonenumber: this.phonenumber}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.phonenumber = result;
+    });
   }
 
   setAirportArea(area) {
@@ -61,7 +79,7 @@ export class HeaderComponent implements OnInit {
      this.DepartureDateTime = this.route.snapshot.queryParamMap.get('DepartureDateTime');
      this.arrivalterminal = this.route.snapshot.queryParamMap.get('ArrivalTerminal');
      this.departureterminal = this.route.snapshot.queryParamMap.get('DepartureTerminal');
-     this.http.get('http://localhost:49542/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.airportServices.getInput()).
+     this.http.get('http://localhost:52181/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.airportServices.getInput()).
    subscribe((response)=>
    {
      this.response=response;
@@ -80,5 +98,22 @@ export class HeaderComponent implements OnInit {
     this.isExpanded = !this.isExpanded;
   }
   title = 'ClientApp things ';
+
+}
+
+
+@Component({
+  selector: 'DialogOverview',
+  templateUrl: 'DialogOverview.html',
+})
+export class DialogOverview {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverview>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
 }

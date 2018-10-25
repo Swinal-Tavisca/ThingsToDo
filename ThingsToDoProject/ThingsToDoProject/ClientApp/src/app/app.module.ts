@@ -8,7 +8,8 @@ import { AgmCoreModule} from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { Airport } from './airport.service';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import {DialogOverview} from './header/header.component';
 import 'hammerjs';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -30,7 +31,11 @@ import { DataService } from './dataService.service';
     MapComponent,
     ReminderComponent,
     SideSectionComponent,
+    DialogOverview
   ],
+  entryComponents: [
+    DialogOverview,
+],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
@@ -44,12 +49,13 @@ import { DataService } from './dataService.service';
     MatListModule,
     MatIconModule,
     MatButtonModule,
+    
     MatCardModule,
     FlexLayoutModule,
     MatInputModule,
     MatAutocompleteModule,
     MatFormFieldModule,
-    MatSelectModule,
+    MatSelectModule,MatDialogModule,
     AgmCoreModule.forRoot(
       {
         apiKey:'AIzaSyA9v-ByUMauD8TazXdViq_f7RF-EHru86A'
