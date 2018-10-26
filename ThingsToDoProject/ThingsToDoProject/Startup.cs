@@ -7,7 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using ThingsToDoProject.Core.Interface;
+using ThingsToDoProject.Core.Interface.DatabaseContracts;
 using ThingsToDoProject.Core.Provider;
+using ThingsToDoProject.Core.Provider.DatabaseProviders;
 using ThingsToDoProject.Core.Translater;
 
 namespace ThingsToDoProject
@@ -34,6 +36,8 @@ namespace ThingsToDoProject
             services.AddSingleton<IGetDistanceTime, GetDistanceTimeOfParticularPlace>();
             services.AddSingleton<ISetReminder, SetReminder>();
             services.AddSingleton<IGetSearch, GetSearchData>();
+            services.AddSingleton<IGetDataAccordingToLayoverTime, GetDataAccordingToLayoverTime>();
+            services.AddSingleton<IAllDataExchangethroughRedisCache, AllDataExchangethroughRedisCache>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

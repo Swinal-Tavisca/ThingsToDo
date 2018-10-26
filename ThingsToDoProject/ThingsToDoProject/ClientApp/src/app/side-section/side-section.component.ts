@@ -22,7 +22,7 @@ export class SideSectionComponent implements OnInit {
     console.log(this.value);
     console.log(this.response);
     //[HttpGet("reminder/{phoneNumber}/{placeId}/{name}/{distance}/{storeNumber}/{GoogleUrl}")]
-    this.http.get('http://localhost:52216/api/Data/reminder/' + this.value + '/' + this.response.placeID + '/'+ this.response.name + '/'+ this.response.distance + '/' + this.response.phoneNumber + '/' + "saurabh")
+    this.http.get('/api/Data/reminder/' + this.value + '/' + this.response.placeID + '/'+ this.response.name + '/'+ this.response.distance + '/' + this.response.phoneNumber + '/' + "saurabh")
     .subscribe(
       error => console.log("Error with Twillio",error),
     );
@@ -38,7 +38,7 @@ export class SideSectionComponent implements OnInit {
 GetAllDataOfParticularPlace(){
   this.loader = true;
 
-  let observable = this.http.get('http://localhost:52216/api/Data/place/'+ this.location + '/'+this.PlaceId )
+  let observable = this.http.get('/api/Data/place/'+ this.location + '/'+this.PlaceId )
   // .subscribe(
   //   data => this.response=data,
   //   error => this.response=false,

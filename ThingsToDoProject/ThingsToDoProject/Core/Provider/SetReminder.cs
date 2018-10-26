@@ -41,7 +41,7 @@ namespace ThingsToDoProject.Core.Provider
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
          
         }
@@ -64,7 +64,7 @@ namespace ThingsToDoProject.Core.Provider
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
         
         }

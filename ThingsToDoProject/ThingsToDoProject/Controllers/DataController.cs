@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ThingsToDoProject.Core.Interface;
+using ThingsToDoProject.Core.Interface.DatabaseContracts;
 using ThingsToDoProject.Core.Provider;
 using ThingsToDoProject.Model;
 
@@ -22,7 +23,11 @@ namespace ThingsToDoProject.Controllers
         private readonly IGetDistanceTime _getDistanceTime;
         private readonly ISetReminder _setReminderData;
         private readonly IGetSearch _getSearch;
-        public DataController(IGetOutsideData getAllData, IGetData getData, IGetLatitudeLongitude getLatitudeLongitude, IGetInsideOutside getInsideOutsideData, IGetPlaceData getPlaceData, IGetDistanceTime getDistanceTime, ISetReminder setReminderData,IGetSearch getSearch)
+        private readonly IGetDataAccordingToLayoverTime _getDataAccordingToLayoverTime;
+        private readonly IAllDataExchangethroughRedisCache _allDataExchangethroughRedisCache;
+        public DataController(IGetOutsideData getAllData, IGetData getData, IGetLatitudeLongitude getLatitudeLongitude, 
+            IGetInsideOutside getInsideOutsideData, IGetPlaceData getPlaceData, IGetDistanceTime getDistanceTime, 
+            ISetReminder setReminderData,IGetSearch getSearch, IGetDataAccordingToLayoverTime getDataAccordingToLayoverTime, IAllDataExchangethroughRedisCache allDataExchangethroughRedisCache)
         {
             _getAllData = getAllData;
             _getData = getData;
@@ -32,9 +37,11 @@ namespace ThingsToDoProject.Controllers
             _getDistanceTime = getDistanceTime;
             _setReminderData = setReminderData;
             _getSearch = getSearch;
+            _getDataAccordingToLayoverTime = getDataAccordingToLayoverTime;
+            _allDataExchangethroughRedisCache = allDataExchangethroughRedisCache;
         }
         //GET: api/Data/search
-        [HttpGet("search/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}")]
+        [HttpGet("search/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}/{LayoverTime}")]
         public async Task<IActionResult> GetSearchData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
         {
             var Data = await _getSearch.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
@@ -44,18 +51,26 @@ namespace ThingsToDoProject.Controllers
                 return BadRequest("Data Not Found");
         }
         //GET: api/Data/outsideAirport
-        [HttpGet("outsideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}")]
-        public async Task<IActionResult> GetOutsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        [HttpGet("outsideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}/{LayoverTime}")]
+        public async Task<IActionResult> GetOutsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest,int LayoverTime)
         {
-            var Data = await _getAllData.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
-            if (Data != null)
-                return Ok(Data);
+            //string AllDataKey = DeparturePlace + PointOfInterest;
+            string FilterKey = DeparturePlace + PointOfInterest + LayoverTime;
+            //var Data = _allDataExchangethroughRedisCache.GetDataFromCache(AllDataKey) == null ?
+            //           await _getAllData.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest) : 
+            //           _allDataExchangethroughRedisCache.GetDataFromCache(AllDataKey);
+
+            var FilterData = _allDataExchangethroughRedisCache.GetDataFromCache(FilterKey) == null ?
+            await GetFilterData(await _getAllData.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest), DeparturePlace, LayoverTime, FilterKey)
+            : _allDataExchangethroughRedisCache.GetDataFromCache(FilterKey);
+            if (FilterData != null)
+                return Ok(FilterData);
             else
                 return BadRequest("Data Not Found");
         }
 
         //GET: api/Data/insideAirport
-        [HttpGet("insideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}")]
+        [HttpGet("insideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}/{LayoverTime}")]
 
         //PointOfInterest is any Stores/Restorents...etc
         public async Task<IActionResult> GetInsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
@@ -70,7 +85,7 @@ namespace ThingsToDoProject.Controllers
         }
 
         //GET: api/Data/InsideOutsideAirport
-        [HttpGet("InsideOutsideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}")]
+        [HttpGet("InsideOutsideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}/{LayoverTime}")]
         public async Task<IActionResult> GetInsideOutsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
         {
             LocationAttributes Position = _getLatitudeLongitude.Get(DeparturePlace + "Airport");
@@ -80,8 +95,15 @@ namespace ThingsToDoProject.Controllers
             else
                 return BadRequest("Not Found");
         }
+        private async Task<List<PlaceAttributes>> GetFilterData(List<PlaceAttributes> AllData, string DeparturePlace, int LayoverTime,string FilterKey)
+        {
+            var data = await _getDataAccordingToLayoverTime.GetFilterData(AllData, DeparturePlace, LayoverTime, FilterKey);
+            if (data != null)
+                return data;
+            else
+                return null;
+        }
 
-        
         //GET: api/Data/position
         [HttpGet("position/{Location}")]
         public LocationAttributes GetPosition(string Location)
