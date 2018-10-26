@@ -21,7 +21,8 @@ namespace ThingsToDoProject.Controllers
         private readonly IGetPlaceData _getPlaceData;
         private readonly IGetDistanceTime _getDistanceTime;
         private readonly ISetReminder _setReminderData;
-        public DataController(IGetOutsideData getAllData, IGetData getData, IGetLatitudeLongitude getLatitudeLongitude, IGetInsideOutside getInsideOutsideData, IGetPlaceData getPlaceData, IGetDistanceTime getDistanceTime, ISetReminder setReminderData)
+        private readonly IGetSearch _getSearch;
+        public DataController(IGetOutsideData getAllData, IGetData getData, IGetLatitudeLongitude getLatitudeLongitude, IGetInsideOutside getInsideOutsideData, IGetPlaceData getPlaceData, IGetDistanceTime getDistanceTime, ISetReminder setReminderData,IGetSearch getSearch)
         {
             _getAllData = getAllData;
             _getData = getData;
@@ -30,8 +31,18 @@ namespace ThingsToDoProject.Controllers
             _getPlaceData = getPlaceData;
             _getDistanceTime = getDistanceTime;
             _setReminderData = setReminderData;
+            _getSearch = getSearch;
         }
-
+        //GET: api/Data/search
+        [HttpGet("search/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}")]
+        public async Task<IActionResult> GetSearchData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        {
+            var Data = await _getSearch.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
+            if (Data != null)
+                return Ok(Data);
+            else
+                return BadRequest("Data Not Found");
+        }
         //GET: api/Data/outsideAirport
         [HttpGet("outsideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}")]
         public async Task<IActionResult> GetOutsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)

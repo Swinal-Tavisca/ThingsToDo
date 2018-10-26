@@ -29,28 +29,32 @@
 </div> -->
 
 <div id="wide">
-    <div *ngIf="isDataLoaded">
-       <agm-map [latitude]="lat" [longitude]="lng" #gm [zoom]="zoom">
-        <agm-marker  [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl" ></agm-marker>
-          <agm-marker 
-          *ngFor="let m of dataService.response ; let i = index"
-          [latitude]="m.latitude"
-          [longitude]="m.longitude"
-          (markerClick)="getDirection(m.latitude,m.longitude)"
-          (markerClick)="getDataOfParticularPlace(m,m.placeID)"
-         > 
-         
-            <agm-snazzy-info-window  [closeWhenOthersOpen]="true">  
-              <ng-template>
-                  <img class="place-image" src={{m.image}} alt="imagggee"/>
-                  {{m.name}}
-              </ng-template>
-            </agm-snazzy-info-window>           
-            <agm-direction [origin]="origin" [destination]="destination" [renderOptions]="renderOptions" >
-          </agm-direction> 
-      </agm-marker>
-      </agm-map>
-    </div> 
-  </div>
+  <div *ngIf="isDataLoaded">
+     <agm-map [latitude]="lat" [longitude]="lng" #gm [zoom]="zoom">
+      <agm-marker  [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl" ></agm-marker>
+        <agm-marker 
+        *ngFor="let m of dataService.response ; let i = index"
+        [latitude]="m.latitude"
+        [longitude]="m.longitude"
+        (markerClick)="getDirection(m.latitude,m.longitude)"
+        (markerClick)="getDataOfParticularPlace(m,m.placeID)"
+       > 
+       <div class="infowindow">
+          <agm-snazzy-info-window  [closeWhenOthersOpen]="true" [padding]="'1'" [backgroundColor]="'#FFFFFF'" [maxWidth]="'700'" [maxHeight]="'700'" [border]="true"  wrapperClass="'infowindow'"  [shadow]="true" [borderRadius]="'5px'" >  
+            <ng-template>
+              
+                <img class="place-image" src={{m.image}}   alt="image" *ngIf ="!loader">
+                <img *ngIf="loader" class="loader" src="../src/assets/images/loader.gif">
+                {{m.name}}
+              
+            </ng-template>
+          </agm-snazzy-info-window>    
+        </div>       
+          <agm-direction [origin]="origin" [destination]="destination" [renderOptions]="renderOptions" >
+        </agm-direction> 
+    </agm-marker>
+    </agm-map>
+  </div> 
+</div>
   
   

@@ -11,14 +11,18 @@ export class SideSectionComponent implements OnInit {
   @Input() PlaceId: string=null;
   location:string;
   response: any;
-
-  
+  image: string = "../src/assets/images/404notfound.jpg";
+  loader: boolean ;
+  value:any;
   constructor(private route: ActivatedRoute, private http: HttpClient) { 
     this.location = this.route.snapshot.queryParamMap.get('location');
   }
 
   SetReminder(){
-    this.http.get('http://localhost:50298/api/Data/reminder/' + this.response.phoneNumber + '/')
+    console.log(this.value);
+    console.log(this.response);
+    //[HttpGet("reminder/{phoneNumber}/{placeId}/{name}/{distance}/{storeNumber}/{GoogleUrl}")]
+    this.http.get('http://localhost:52216/api/Data/reminder/' + this.value + '/' + this.response.placeID + '/'+ this.response.name + '/'+ this.response.distance + '/' + this.response.phoneNumber + '/' + "saurabh")
     .subscribe(
       error => console.log("Error with Twillio",error),
     );
@@ -32,11 +36,28 @@ export class SideSectionComponent implements OnInit {
 }
 
 GetAllDataOfParticularPlace(){
-  this.http.get('http://localhost:50298/api/Data/place/'+ this.location + '/'+this.PlaceId )
-  .subscribe(
-    data => this.response=data,
-    error => this.response=false,
-  );
+  this.loader = true;
+
+  let observable = this.http.get('http://localhost:52216/api/Data/place/'+ this.location + '/'+this.PlaceId )
+  // .subscribe(
+  //   data => this.response=data,
+  //   error => this.response=false,
+  // );
+
+  observable.subscribe((response)  => {
+    this.response=response;
+    this.loader = false;
+  },
+  error=>{
+    if(error.status==400)
+    {
+      this.response.image = this.image;
+     
+    }
+    this.loader = false;
+  
+  })
+
   }
 
   // subscribe((response)=>
