@@ -17,28 +17,28 @@ namespace ThingsToDoProject.Core.Provider.DatabaseProviders
             EndPoints = { "localhost" }
         };
         public ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(option);
-        public List<PlaceAttributes> GetDataFromCache(string Key)
+        public T GetDataFromCache<T>(string Key)
         {
-            List<PlaceAttributes> data = new List<PlaceAttributes>();
+            T data;
             try
             {
                 IDatabase db = redis.GetDatabase();
                 string val = db.StringGet(Key);
                 if (val == null)
                 {
-                    return null;
+                    return default(T);
                 }
-                data = JsonConvert.DeserializeObject<List<PlaceAttributes>>(val);
+                data = JsonConvert.DeserializeObject<T>(val);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                data = null;
+                data = default(T);
             }
             return data;
         }
 
-        public void SaveInCache(List<PlaceAttributes> PlaceData,string Key)
+        public void SaveInCache<T>(ref T PlaceData,string Key)
         {
             try
             {

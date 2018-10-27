@@ -92,7 +92,7 @@ response: any;
       this.lat =  this.Getresponse.latitudePosition;
       this.lng=this.Getresponse.longitudePosition; 
     })
-    this.http.get('/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.airportServices.getInput()).
+    this.http.get('/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.airportServices.getInput() +'/' + this.durationminutes).
   subscribe((response)=>
   {
   this.response = response;

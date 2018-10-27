@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ThingsToDoProject.Core.Interface;
+using ThingsToDoProject.Core.Interface.DatabaseContracts;
 using ThingsToDoProject.Core.Translater;
 using ThingsToDoProject.Model;
 
@@ -17,14 +18,17 @@ namespace ThingsToDoProject.Core.Provider
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IGetDistanceTime _getDistanceTime;
         private readonly IGetLatitudeLongitude _getLatitudeLongitude;
+        private readonly IAllDataExchangethroughRedisCache _allDataExchangethroughRedisCache;
         IConfiguration _iconfiguration;
 
-        public GetDataOfParticularPlace(IHttpClientFactory httpClientFactory, IConfiguration configuration, IGetDistanceTime getDistanceTime, IGetLatitudeLongitude getLatitudeLongitude)
+        public GetDataOfParticularPlace(IHttpClientFactory httpClientFactory, IConfiguration configuration, 
+            IGetDistanceTime getDistanceTime, IGetLatitudeLongitude getLatitudeLongitude, IAllDataExchangethroughRedisCache allDataExchangethroughRedisCache)
         {
             _httpClientFactory = httpClientFactory;
             _iconfiguration = configuration;
             _getDistanceTime = getDistanceTime;
             _getLatitudeLongitude = getLatitudeLongitude;
+            _allDataExchangethroughRedisCache = allDataExchangethroughRedisCache;
         }
         public async Task<PlaceAttributes> GetPlaceData(string DeparturePlace , string PlaceId)
         {
@@ -46,6 +50,7 @@ namespace ThingsToDoProject.Core.Provider
                 DistanceTimeAttributes Journey = await _getDistanceTime.GetDistanceTime(DeparturePlace, Data.Latitude, Data.Longitude);
                 Data.Distance = Journey.Distance;
                 Data.Duration = Journey.Duration;
+                _allDataExchangethroughRedisCache.SaveInCache<PlaceAttributes>(ref Data, PlaceId);
                 return Data;
             }
             catch (Exception e)

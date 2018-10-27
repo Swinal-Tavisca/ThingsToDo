@@ -8,7 +8,7 @@ namespace ThingsToDoProject.Core.Interface.DatabaseContracts
 {
     public interface IAllDataExchangethroughRedisCache
     {
-        List<PlaceAttributes> GetDataFromCache(string Key);
-        void SaveInCache(List<PlaceAttributes> PlaceData, string Key);
+        T GetDataFromCache<T>(string Key);
+        void SaveInCache<T>(ref T data, string v);
     }
 }

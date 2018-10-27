@@ -52,10 +52,12 @@ namespace ThingsToDoProject.Core.Provider
                         data.PlaceID = AllData[Index].PlaceID;
                         data.Rating = AllData[Index].Rating;
                         data.Vicinity = AllData[Index].Vicinity;
+                        data.Latitude = AllData[Index].Latitude;
+                        data.Longitude = AllData[Index].Longitude;
                         FilterData.Add(data);
                     }
                 }
-                _allDataExchangethroughRedisCache.SaveInCache(FilterData, FilterKey);
+                _allDataExchangethroughRedisCache.SaveInCache(ref FilterData, FilterKey);
                 return FilterData;
             }
             catch (Exception e)

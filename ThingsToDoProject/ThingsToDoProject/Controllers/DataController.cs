@@ -42,11 +42,15 @@ namespace ThingsToDoProject.Controllers
         }
         //GET: api/Data/search
         [HttpGet("search/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}/{LayoverTime}")]
-        public async Task<IActionResult> GetSearchData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        public async Task<IActionResult> GetSearchData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest,int LayoverTime)
         {
-            var Data = await _getSearch.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
-            if (Data != null)
-                return Ok(Data);
+            string FilterKey = DeparturePlace + PointOfInterest + LayoverTime;
+            var FilterData = _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey) == null ?
+            await GetFilterData(await _getSearch.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest), DeparturePlace, LayoverTime, FilterKey)
+            : _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey);
+
+            if (FilterData != null)
+                return Ok(FilterData);
             else
                 return BadRequest("Data Not Found");
         }
@@ -54,15 +58,11 @@ namespace ThingsToDoProject.Controllers
         [HttpGet("outsideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}/{LayoverTime}")]
         public async Task<IActionResult> GetOutsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest,int LayoverTime)
         {
-            //string AllDataKey = DeparturePlace + PointOfInterest;
             string FilterKey = DeparturePlace + PointOfInterest + LayoverTime;
-            //var Data = _allDataExchangethroughRedisCache.GetDataFromCache(AllDataKey) == null ?
-            //           await _getAllData.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest) : 
-            //           _allDataExchangethroughRedisCache.GetDataFromCache(AllDataKey);
-
-            var FilterData = _allDataExchangethroughRedisCache.GetDataFromCache(FilterKey) == null ?
+            var FilterData = _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey) == null ?
             await GetFilterData(await _getAllData.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest), DeparturePlace, LayoverTime, FilterKey)
-            : _allDataExchangethroughRedisCache.GetDataFromCache(FilterKey);
+            : _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey);
+
             if (FilterData != null)
                 return Ok(FilterData);
             else
@@ -73,27 +73,32 @@ namespace ThingsToDoProject.Controllers
         [HttpGet("insideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}/{LayoverTime}")]
 
         //PointOfInterest is any Stores/Restorents...etc
-        public async Task<IActionResult> GetInsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        public async Task<IActionResult> GetInsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest,int LayoverTime)
         {
+            string FilterKey = DeparturePlace + PointOfInterest + LayoverTime;
+            var FilterData = _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey) == null ?
+            await GetFilterData(await _getData.GetData(_getLatitudeLongitude.Get(DeparturePlace), DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest), DeparturePlace, LayoverTime, FilterKey)
+            : _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey);
 
-            LocationAttributes Position = _getLatitudeLongitude.Get(DeparturePlace + "Airport");
-            var Data = await _getData.GetData(Position, DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
-            if (Data != null)
-                return Ok(Data);
+            if (FilterData != null)
+                return Ok(FilterData);
             else
-                return BadRequest("Not Found");
+                return BadRequest("Data Not Found");
         }
 
         //GET: api/Data/InsideOutsideAirport
         [HttpGet("InsideOutsideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}/{LayoverTime}")]
-        public async Task<IActionResult> GetInsideOutsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        public async Task<IActionResult> GetInsideOutsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest,int LayoverTime)
         {
-            LocationAttributes Position = _getLatitudeLongitude.Get(DeparturePlace + "Airport");
-            var Data = await _getInsideOutsideData.GetInsideOutsideData(Position, DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest);
-            if (Data != null)
-                return Ok(Data);
+            string FilterKey = DeparturePlace + PointOfInterest + LayoverTime;
+            var FilterData = _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey) == null ?
+            await GetFilterData(await _getInsideOutsideData.GetInsideOutsideData(_getLatitudeLongitude.Get(DeparturePlace), DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest), DeparturePlace, LayoverTime, FilterKey)
+            : _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey);
+
+            if (FilterData != null)
+                return Ok(FilterData);
             else
-                return BadRequest("Not Found");
+                return BadRequest("Data Not Found");
         }
         private async Task<List<PlaceAttributes>> GetFilterData(List<PlaceAttributes> AllData, string DeparturePlace, int LayoverTime,string FilterKey)
         {
@@ -116,7 +121,10 @@ namespace ThingsToDoProject.Controllers
         [HttpGet("place/{DeparturePlace}/{PlaceId}")]
         public async Task<IActionResult> GetInfoOfParticularPlace(string DeparturePlace,string PlaceID)
         {
-            var Data = await _getPlaceData.GetPlaceData(DeparturePlace,PlaceID);
+            string FilterKey = PlaceID;
+            var Data= _allDataExchangethroughRedisCache.GetDataFromCache<PlaceAttributes>(FilterKey) == default(PlaceAttributes) ?
+                await _getPlaceData.GetPlaceData(DeparturePlace,PlaceID): 
+                _allDataExchangethroughRedisCache.GetDataFromCache<PlaceAttributes>(FilterKey);
             if (Data != null)
                 return Ok(Data);
             else
