@@ -34,6 +34,10 @@ export class SideSectionComponent implements OnInit {
     this.PlaceId=null;
   }
 }
+CloseSection()
+{
+  
+}
 
 GetAllDataOfParticularPlace(){
   this.loader = true;
@@ -49,9 +53,14 @@ GetAllDataOfParticularPlace(){
     this.loader = false;
   },
   error=>{
-    if(error.status==400)
+    if(error.status==400 || error.status==404)
     {
-      this.response.image = this.image;
+      //this.response=null;
+       this.response.image = this.image;
+      // this.response.name = "name not found";
+      // this.response.duration="data not available";
+      // this.response.distance="data not available";
+      // this.response.
      
     }
     this.loader = false;

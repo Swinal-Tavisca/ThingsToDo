@@ -49,6 +49,14 @@ export class DataComponent implements OnInit {
     // })
     // this.dataService.response=this.response;
   }
+  counter(i:number){
+    
+    var z;
+    z=Math.floor(i);
+  
+   return new Array(z);
+  
+}
 
   MoreInfo(placeid: string) {
     this.info.emit(placeid);
