@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ThingsToDoProject.Core;
 using ThingsToDoProject.Core.Interface;
 using ThingsToDoProject.Core.Interface.DatabaseContracts;
 using ThingsToDoProject.Core.Provider;
@@ -13,6 +14,8 @@ namespace ThingsToDoProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Log]
+    [Exception]
     public class DataController : ControllerBase
     {
         private readonly IGetOutsideData _getAllData;

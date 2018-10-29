@@ -13,6 +13,8 @@ using ThingsToDoProject.Model;
 
 namespace ThingsToDoProject.Core.Provider
 {
+    [Log]
+    [Exception]
     public class GetDataOfParticularPlace : IGetPlaceData
     {
         private readonly IHttpClientFactory _httpClientFactory;
