@@ -4,7 +4,13 @@
 
 <mat-card-header>
 
-<mat-card-title><b>{{response.name}}</b><br></mat-card-title>
+<mat-card-title>
+  <b>{{response.name}}</b> 
+  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="CloseSection()">
+  <mat-icon>close</mat-icon>
+  </button>
+  <br>
+</mat-card-title>
 
 </mat-card-header>
 
@@ -119,3 +125,7 @@ Rating: {{review.rating}}<br>
 </mat-card>
 </div>
 <img *ngIf="loader" class="loader" src="../src/assets/images/loader.gif">
+<div  *ngIf ="!response">
+  <img class="no-data-img" src="../src/assets/images/404notfound.jpg">
+
+</div>
