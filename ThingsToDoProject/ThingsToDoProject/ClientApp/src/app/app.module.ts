@@ -21,6 +21,8 @@ import { ReminderComponent } from './reminder/reminder.component';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { SideSectionComponent } from './side-section/side-section.component';
 import { DataService } from './dataService.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,9 @@ import { DataService } from './dataService.service';
        {path:':value',component:MainContentComponent},
       { path: '**',redirectTo: '/Home'}
       
-    ])
+    ]),
+
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [ Airport,DataService  ],
   bootstrap: [AppComponent]

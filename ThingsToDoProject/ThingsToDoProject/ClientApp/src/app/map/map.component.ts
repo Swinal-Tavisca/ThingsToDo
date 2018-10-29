@@ -38,7 +38,7 @@ data:any;
   {
   this.loader = true;
 
-   let observable =  this.http.get('/api/Data/place/'+ this.location + '/'+ placeid );
+   let observable =  this.http.get('http://localhost:50513/api/Data/place/'+ this.location + '/'+ placeid );
     observable.subscribe((response)  => {
       this.res=response;
       marker.image=this.res.image;
@@ -87,12 +87,12 @@ response: any;
     this.isDataLoaded=true;
     this.city= this.route.snapshot.queryParamMap.get('location');
 
-    this.http.get('/api/Data/position/'+this.city).subscribe((response)=>{
+    this.http.get('http://localhost:50513/api/Data/position/'+this.city).subscribe((response)=>{
       this.Getresponse = response;
       this.lat =  this.Getresponse.latitudePosition;
       this.lng=this.Getresponse.longitudePosition; 
     })
-    this.http.get('/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.airportServices.getInput() +'/' + this.durationminutes).
+    this.http.get('http://localhost:50513/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.airportServices.getInput() +'/' + this.durationminutes).
   subscribe((response)=>
   {
   this.response = response;

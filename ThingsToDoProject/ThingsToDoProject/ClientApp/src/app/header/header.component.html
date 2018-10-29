@@ -45,7 +45,7 @@
                       <div *ngIf="selected=='inside'"><a (click)="sidenav.toggle()" [routerLink]='["/restaurant"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>
                         <mat-icon>home</mat-icon> Home
                     </a></div>
-                    <a (click)="sidenav.toggle()" (click)="Category()"[routerLink]='["/restaurant"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>
+                    <a (click)="sidenav.toggle()" [routerLink]='["/restaurant"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>
                         <mat-icon>store</mat-icon> Restaurant
                     </a>
                     <a (click)="sidenav.toggle()" [routerLink]='["/store"]' [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-list-item>
