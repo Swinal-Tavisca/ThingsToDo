@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatChipsModule,MatTabsModule,MatSelectModule,MatFormFieldModule,MatAutocompleteModule,MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule , MatInputModule,MatCardModule, MatExpansionModule} from "@angular/material";
+import { MatProgressSpinnerModule,MatChipsModule,MatTabsModule,MatSelectModule,MatFormFieldModule,MatAutocompleteModule,MatToolbarModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule , MatInputModule,MatCardModule, MatExpansionModule} from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { AgmCoreModule} from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
@@ -39,6 +39,7 @@ import { DataService } from './dataService.service';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
     MatTabsModule,
     MatChipsModule,
     FormsModule,

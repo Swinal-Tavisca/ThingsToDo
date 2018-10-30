@@ -11,17 +11,13 @@ export class MainContentComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.route.snapshot.queryParamMap.has('location'));
-    console.log(this.route.snapshot.queryParamMap.get('location'));
-    console.log(this.route.snapshot.queryParamMap.has('time'));
-    console.log(this.route.snapshot.queryParamMap.get('time'));
     this.sideSectionIsOpened = false;
   }
   sideSectionIsOpened = false;
 
-  // toggleSideSection() {
-  //   this.sideSectionIsOpened = !this.sideSectionIsOpened;
-  // }
+  toggleSideSection() {
+    this.sideSectionIsOpened = !this.sideSectionIsOpened;
+  }
 
   MoreInfo(Id: string){
     this.PlaceId = Id;

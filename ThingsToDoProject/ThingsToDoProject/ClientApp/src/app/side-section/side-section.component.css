@@ -30,7 +30,15 @@ img{
   height: 78vh;
   
   }
-
+  .no-data-img{
+    min-width: 200px;
+  }
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
   @media only screen and (max-width: 1200px) {
     :host {
       box-sizing: border-box;

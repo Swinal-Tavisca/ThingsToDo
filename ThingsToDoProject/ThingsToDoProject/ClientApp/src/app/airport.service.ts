@@ -8,13 +8,10 @@ export class Airport {
     }
 
     setArea(area) {
-        console.log(area);
         this.area = area; 
     }
 
     setInput(input) {
-        console.log(input);
-       
          this.input = input; 
     }
 }

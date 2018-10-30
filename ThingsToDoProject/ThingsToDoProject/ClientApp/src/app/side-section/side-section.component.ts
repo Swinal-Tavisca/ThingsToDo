@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, Input } from '@angular/core';
+import { Component, OnInit, HostBinding, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -12,20 +12,28 @@ export class SideSectionComponent implements OnInit {
   location:string;
   response: any;
   image: string = "../src/assets/images/404notfound.jpg";
-  loader: boolean ;
+  loader: boolean;
   value:any;
+  url:any;
   constructor(private route: ActivatedRoute, private http: HttpClient) { 
     this.location = this.route.snapshot.queryParamMap.get('location');
-  }
+    
+  
+    }
+  @Output() toggle: EventEmitter<string> = new EventEmitter<string>();
+  
 
-  SetReminder(){
+
+  SetReminder() {
+    this.url = window.location.href;
+    console.log("url:", this.url);
     console.log(this.value);
     console.log(this.response);
+
+
     //[HttpGet("reminder/{phoneNumber}/{placeId}/{name}/{distance}/{storeNumber}/{GoogleUrl}")]
-    this.http.get('/api/Data/reminder/' + this.value + '/' + this.response.placeID + '/'+ this.response.name + '/'+ this.response.distance + '/' + this.response.phoneNumber + '/' + "saurabh")
-    .subscribe(
-      error => console.log("Error with Twillio",error),
-    );
+    this.http.get('/api/Data/reminder/' + this.value + '/' + this.response.placeID + '/'+ this.response.name + '/'+ this.response.distance + '/' + this.response.phoneNumber +"?returnUrl="+this.url)
+    .subscribe();
   }
 
   ngOnChanges(){
@@ -34,9 +42,8 @@ export class SideSectionComponent implements OnInit {
     this.PlaceId=null;
   }
 }
-CloseSection()
-{
-  
+CloseSection(){
+  this.toggle.emit("ok");
 }
 
 GetAllDataOfParticularPlace(){

@@ -31,7 +31,8 @@
     flex-wrap: wrap;
   }
   .content{
-    margin-top: 6%;
+    margin: 0 auto;
+    margin-top: 1em;
   }
   .stars{
     width:1.5vh;

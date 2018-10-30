@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -25,10 +25,6 @@ export class HeaderComponent implements OnInit {
   panelColor = new FormControl('red');
   airportArea: string = 'InsideOutsideAirport';
 
-  myControl = new FormControl();
-  options: string[] = ['Bar', 'Spa', 'Store'];
-  filteredOptions: Observable<string[]>;
-
   type:any;
   location:any;
   arrivalDatetime:any;
@@ -36,18 +32,35 @@ export class HeaderComponent implements OnInit {
   durationminutes:any;
   arrivalterminal:any;
   departureterminal:any;
+  hours:any;
+  minutes:any;
+  duration:any;
+  url:any;
 
-  constructor(public airportServices: Airport,private route: ActivatedRoute,private http: HttpClient, public dataService: DataService,public dialog: MatDialog) {}
+  constructor(public airportServices: Airport,private route: ActivatedRoute, private router: Router, private http: HttpClient, public dataService: DataService,public dialog: MatDialog) {
+   setTimeout(()=>{
+    this.location = this.route.snapshot.queryParams['location'];
+    this.durationminutes = this.route.snapshot.queryParamMap.get('DurationMinutes');
+    this.getTime(this.durationminutes);
+    //console.table(route);
+   },1000);
+    
+    //this.location = this.route.snapshot.queryParamMap.get('location');
+  }
   
+getTime(durationminutes){
+  this.hours   = Math.floor(durationminutes / 60);
+  this.minutes = Math.floor(durationminutes % 60);
+  this.duration = this.hours + "Hour" + " " + this.minutes + "Minutes";
+}
+
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
   }
   SetReminder(){
-    this.http.get('/api/Data/reminder/' + this.phonenumber + '/')
+    
+    this.http.get('/api/Data/reminder/' + this.phonenumber +"?returnUrl"+this.url)
     .subscribe();
+ 
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverview, {
@@ -66,19 +79,18 @@ export class HeaderComponent implements OnInit {
   }
 
   setAirportArea(area) {
+    this.dataService.direction=false
     this.airportServices.setArea(area);
     this.airportArea = area;
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
-  }
-
-
   selected = 'outside';
   isExpanded = false;
+  eventHandler(keyCode) {
+ 
+    if(keyCode==13)
+    this.check();
+    }
 
   check() {
     this.airportServices.setInput(this.value);
@@ -86,10 +98,9 @@ export class HeaderComponent implements OnInit {
      this.arrivalDatetime = this.route.snapshot.queryParamMap.get('ArrivalDateTime');
      this.DepartureDateTime = this.route.snapshot.queryParamMap.get('DepartureDateTime');
      this.arrivalterminal = this.route.snapshot.queryParamMap.get('ArrivalTerminal');
-    this.departureterminal = this.route.snapshot.queryParamMap.get('DepartureTerminal');
-    this.durationminutes = this.route.snapshot.queryParamMap.get('DurationMinutes');
-
-    this.http.get('/api/Data/search/' + this.location + ' / ' + this.arrivalDatetime + ' / ' + this.DepartureDateTime + ' / ' + this.airportServices.getInput() + '/' + this.durationminutes + '/' + this.airportArea).
+     this.departureterminal = this.route.snapshot.queryParamMap.get('DepartureTerminal');
+     this.durationminutes = this.route.snapshot.queryParamMap.get('DurationMinutes');
+     this.http.get('/api/Data/search/' + this.location + ' / ' + this.arrivalDatetime + ' / ' + this.DepartureDateTime + ' / ' + this.airportServices.getInput() + '/' + this.durationminutes + '/' + this.airportArea).
    subscribe((response)=>
    {
      this.response=response;
@@ -120,7 +131,8 @@ export class DialogOverview {
 
   constructor(
     public dialogRef: MatDialogRef<DialogOverview>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    }
 
   onNoClick(): void {
     this.dialogRef.close();

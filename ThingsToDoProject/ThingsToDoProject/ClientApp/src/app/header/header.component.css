@@ -25,6 +25,12 @@
       background-color: #4189C7;
       color: white;
   }
+
+  .chip.link-active,
+  .chip:hover{
+    background-color: #4189C7;
+    color: white;
+  }
   .space{
     padding-right: 10px;
   }

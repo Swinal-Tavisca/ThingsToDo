@@ -57,7 +57,10 @@ export class DataComponent implements OnInit {
    return new Array(z);
   
 }
-
+sideSectionIsOpened=false;
+MoreInfoOpen(){
+  this.sideSectionIsOpened = !this.sideSectionIsOpened;
+}
   MoreInfo(placeid: string) {
     this.info.emit(placeid);
   }
