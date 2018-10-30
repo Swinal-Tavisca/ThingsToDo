@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit {
     );
   }
   SetReminder(){
-    this.http.get('http://localhost:52216/api/Data/reminder/' + this.phonenumber + '/')
+    this.http.get('/api/Data/reminder/' + this.phonenumber + '/')
     .subscribe();
   }
   openDialog(): void {
@@ -86,7 +86,7 @@ export class HeaderComponent implements OnInit {
      this.DepartureDateTime = this.route.snapshot.queryParamMap.get('DepartureDateTime');
      this.arrivalterminal = this.route.snapshot.queryParamMap.get('ArrivalTerminal');
      this.departureterminal = this.route.snapshot.queryParamMap.get('DepartureTerminal');
-    this.http.get('http://localhost:52216/api/Data/search'+ this.location +' / ' + this.arrivalDatetime +' / ' +  this.DepartureDateTime +' / ' + this.airportServices.getInput()).
+    this.http.get('/api/Data/search/'+ this.location +' / ' + this.arrivalDatetime +' / ' +  this.DepartureDateTime +' / ' + this.airportServices.getInput()).
    subscribe((response)=>
    {
      this.response=response;

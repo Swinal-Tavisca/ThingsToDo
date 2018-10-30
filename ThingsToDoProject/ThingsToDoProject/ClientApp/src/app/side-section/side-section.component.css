@@ -1,31 +1,121 @@
 :host {
+  box-sizing: border-box;
+  display: none;
+  position: absolute;
+  margin-left: 25%;
+  top: 8vh;
+  width: 20%;
+  height: 78vh;
+ 
+  z-index: 4;
+  background: #ccc;
+  min-width: 300px;
+}
+
+:host.is-open {
+  display: block;
+}
+img{
+  padding: 1.5em;
+  width: 100%;
+  
+  }
+  
+  .example-card{
+  
+  overflow-y: auto;
+  
+  overflow-x: hidden;
+  
+  height: 78vh;
+  
+  }
+
+  @media only screen and (max-width: 1200px) {
+    :host {
+      box-sizing: border-box;
+      display: none;
+      position: absolute;
+      margin-left: 0%;
+      
+      top: 8vh;
+      width: 20%;
+      height: 77.5vh;
+     
+      z-index: 4;
+      background: #ccc;
+      min-width: 300px;
+    }  
+    .example-card{
+  
+      overflow-y: auto;
+      
+      overflow-x: hidden;
+      
+      height: 77.5vh; 
+    }  
+    .no-data-img{
+      width:inherit;
+      height:inherit;
+      
+    }
+  }
+  /* @media only screen and (max-width:959px){
+    :host {
+      box-sizing: border-box;
+      display: none;
+      position: absolute;
+      margin-left: 0%;
+      
+      top: 0vh;
+      width: 20%;
+      height: 92vh;
+     
+      z-index: 4;
+      background: #ccc;
+      min-width: 300px;
+    }
+    .example-card{
+  
+      overflow-y: auto;
+      
+      overflow-x: hidden;
+      
+      height: 86vh;
+
+  }
+  .no-data-img{
+    width:inherit;
+    height:inherit;
+    
+  }
+} */
+@media only screen and (max-width:959px){
+  :host {
     box-sizing: border-box;
     display: none;
     position: absolute;
-    margin-left: 30%;
-    top: 8vh;
-    width: 300px;
-    height: 90%;
-    padding: 20px 10px;
+    margin-left: 0%;
+    
+    top: 0vh;
+    width: 100%;
+   
     z-index: 4;
     background: #ccc;
+    min-width: 300px;
   }
-  
-  :host.is-open {
-    display: block;
-  }
-  img{
+  .example-card{
 
-    width: 280px;
-    
-    }
-    
-    .example-card{
-    
     overflow-y: auto;
     
     overflow-x: hidden;
     
-    height: 76vh;
-    
-    }
+    height: 100%;
+
+}
+.no-data-img{
+  width:inherit;
+  height:inherit;
+  
+}
+}

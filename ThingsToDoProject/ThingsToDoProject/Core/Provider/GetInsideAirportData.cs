@@ -13,6 +13,8 @@ using ThingsToDoProject.Core.Translater;
 
 namespace ThingsToDoProject.Core.Provider
 {
+    [Log]
+    [Exception]
     public class GetInsideAirportData : IGetData
     {
         private readonly IHttpClientFactory _httpClientFactory;

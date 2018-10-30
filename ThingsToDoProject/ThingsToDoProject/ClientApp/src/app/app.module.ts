@@ -70,7 +70,7 @@ import { DataService } from './dataService.service';
       { path: '',redirectTo: '/Home', pathMatch: 'full' },
       { path: 'Home',component: MainContentComponent},
       { path: 'restaurant',component: MainContentComponent},
-      { path: 'shops',component: MainContentComponent},
+      { path: 'store',component: MainContentComponent},
       {path:'attractions',component:MainContentComponent},
        {path:':value',component:MainContentComponent},
       { path: '**',redirectTo: '/Home'}

@@ -19,11 +19,12 @@ export class MainContentComponent implements OnInit {
   }
   sideSectionIsOpened = false;
 
-  toggleSideSection() {
-    this.sideSectionIsOpened = !this.sideSectionIsOpened;
-  }
+  // toggleSideSection() {
+  //   this.sideSectionIsOpened = !this.sideSectionIsOpened;
+  // }
 
   MoreInfo(Id: string){
     this.PlaceId = Id;
+    this.sideSectionIsOpened = !this.sideSectionIsOpened;
   }
 }
