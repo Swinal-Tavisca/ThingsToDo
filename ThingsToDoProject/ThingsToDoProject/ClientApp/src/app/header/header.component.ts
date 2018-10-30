@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
 import { Airport } from '../airport.service';
 import { DataService } from '../dataService.service';
 import { HttpClient } from '@angular/common/http';
-import {Inject} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export interface DialogData {
-  phonenumber:number;
+  phonenumber: number;
 }
 
 @Component({
@@ -19,53 +17,50 @@ export interface DialogData {
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  phonenumber:number;
-  value:any;
-  response:any;
+  phonenumber: number;
+  value: any;
+  response: any;
   panelColor = new FormControl('red');
   airportArea: string = 'InsideOutsideAirport';
 
-  type:any;
-  location:any;
-  arrivalDatetime:any;
-  DepartureDateTime:any;
-  durationminutes:any;
-  arrivalterminal:any;
-  departureterminal:any;
-  hours:any;
-  minutes:any;
-  duration:any;
-  url:any;
+  type: any;
+  location: any;
+  arrivalDatetime: any;
+  DepartureDateTime: any;
+  durationminutes: any;
+  arrivalterminal: any;
+  departureterminal: any;
+  hours: any;
+  minutes: any;
+  duration: any;
+  url: any;
 
-  constructor(public airportServices: Airport,private route: ActivatedRoute, private router: Router, private http: HttpClient, public dataService: DataService,public dialog: MatDialog) {
-   setTimeout(()=>{
-    this.location = this.route.snapshot.queryParams['location'];
-    this.durationminutes = this.route.snapshot.queryParamMap.get('DurationMinutes');
-    this.getTime(this.durationminutes);
-    //console.table(route);
-   },1000);
-    
-    //this.location = this.route.snapshot.queryParamMap.get('location');
+  constructor(public airportServices: Airport, private route: ActivatedRoute, private router: Router, private http: HttpClient, public dataService: DataService, public dialog: MatDialog) {
+    setTimeout(() => {
+      this.location = this.route.snapshot.queryParams['location'];
+      this.durationminutes = this.route.snapshot.queryParamMap.get('DurationMinutes');
+      this.getTime(this.durationminutes);
+    }, 1000);
   }
-  
-getTime(durationminutes){
-  this.hours   = Math.floor(durationminutes / 60);
-  this.minutes = Math.floor(durationminutes % 60);
-  this.duration = this.hours + "Hour" + " " + this.minutes + "Minutes";
-}
+
+  getTime(durationminutes) {
+    this.hours = Math.floor(durationminutes / 60);
+    this.minutes = Math.floor(durationminutes % 60);
+    this.duration = this.hours + "Hour" + " " + this.minutes + "Minutes";
+  }
 
   ngOnInit() {
   }
-  SetReminder(){
-    
-    this.http.get('/api/Data/reminder/' + this.phonenumber +"?returnUrl"+this.url)
-    .subscribe();
- 
+  SetReminder() {
+
+    this.http.get('/api/Data/reminder/' + this.phonenumber + "?returnUrl" + this.url)
+      .subscribe();
+
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverview, {
       width: '250px',
-      data: {phonenumber: this.phonenumber}
+      data: { phonenumber: this.phonenumber }
 
     });
 
@@ -79,7 +74,7 @@ getTime(durationminutes){
   }
 
   setAirportArea(area) {
-    this.dataService.direction=false
+    this.dataService.direction = false
     this.airportServices.setArea(area);
     this.airportArea = area;
   }
@@ -87,29 +82,25 @@ getTime(durationminutes){
   selected = 'outside';
   isExpanded = false;
   eventHandler(keyCode) {
- 
-    if(keyCode==13)
-    this.check();
-    }
+
+    if (keyCode == 13)
+      this.check();
+  }
 
   check() {
     this.airportServices.setInput(this.value);
-     this.location = this.route.snapshot.queryParamMap.get('location');
-     this.arrivalDatetime = this.route.snapshot.queryParamMap.get('ArrivalDateTime');
-     this.DepartureDateTime = this.route.snapshot.queryParamMap.get('DepartureDateTime');
-     this.arrivalterminal = this.route.snapshot.queryParamMap.get('ArrivalTerminal');
-     this.departureterminal = this.route.snapshot.queryParamMap.get('DepartureTerminal');
-     this.durationminutes = this.route.snapshot.queryParamMap.get('DurationMinutes');
-     this.http.get('/api/Data/search/' + this.location + ' / ' + this.arrivalDatetime + ' / ' + this.DepartureDateTime + ' / ' + this.airportServices.getInput() + '/' + this.durationminutes + '/' + this.airportArea).
-   subscribe((response)=>
-   {
-     this.response=response;
-     this.dataService.response=this.response;
-   });
-     
-    
- 
-   }
+    this.location = this.route.snapshot.queryParamMap.get('location');
+    this.arrivalDatetime = this.route.snapshot.queryParamMap.get('ArrivalDateTime');
+    this.DepartureDateTime = this.route.snapshot.queryParamMap.get('DepartureDateTime');
+    this.arrivalterminal = this.route.snapshot.queryParamMap.get('ArrivalTerminal');
+    this.departureterminal = this.route.snapshot.queryParamMap.get('DepartureTerminal');
+    this.durationminutes = this.route.snapshot.queryParamMap.get('DurationMinutes');
+    this.http.get('/api/Data/search/' + this.location + ' / ' + this.arrivalDatetime + ' / ' + this.DepartureDateTime + ' / ' + this.airportServices.getInput() + '/' + this.durationminutes + '/' + this.airportArea).
+      subscribe((response) => {
+        this.response = response;
+        this.dataService.response = this.response;
+      });
+  }
 
   collapse() {
     this.isExpanded = false;
@@ -122,7 +113,6 @@ getTime(durationminutes){
 
 }
 
-
 @Component({
   selector: 'DialogOverview',
   templateUrl: 'DialogOverview.html',
@@ -132,7 +122,7 @@ export class DialogOverview {
   constructor(
     public dialogRef: MatDialogRef<DialogOverview>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-    }
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
