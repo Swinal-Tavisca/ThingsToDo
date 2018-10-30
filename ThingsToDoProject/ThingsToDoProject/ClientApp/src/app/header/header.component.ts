@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
   durationminutes:any;
   arrivalterminal:any;
   departureterminal:any;
+  url:any;
 
   constructor(public airportServices: Airport,private route: ActivatedRoute,private http: HttpClient, public dataService: DataService,public dialog: MatDialog) {}
   
@@ -46,7 +47,8 @@ export class HeaderComponent implements OnInit {
     );
   }
   SetReminder(){
-    this.http.get('/api/Data/reminder/' + this.phonenumber + '/')
+    this.url=window.location.href;
+    this.http.get('/api/Data/reminder/' + this.phonenumber +"?returnUrl"+this.url )
     .subscribe();
   }
   openDialog(): void {

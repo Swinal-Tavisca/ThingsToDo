@@ -9,7 +9,7 @@
  
   z-index: 4;
   background: #ccc;
-  min-width: 300px;
+  min-width: 400px;
 }
 
 :host.is-open {
@@ -44,7 +44,7 @@ img{
      
       z-index: 4;
       background: #ccc;
-      min-width: 300px;
+      min-width: 400px;
     }  
     .example-card{
   
