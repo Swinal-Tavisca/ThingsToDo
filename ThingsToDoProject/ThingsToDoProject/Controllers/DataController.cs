@@ -44,12 +44,12 @@ namespace ThingsToDoProject.Controllers
             _allDataExchangethroughRedisCache = allDataExchangethroughRedisCache;
         }
         //GET: api/Data/search
-        [HttpGet("search/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}/{LayoverTime}")]
-        public async Task<IActionResult> GetSearchData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest,int LayoverTime)
+        [HttpGet("search/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}/{LayoverTime}/{AreaStatus}")]
+        public async Task<IActionResult> GetSearchData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest,int LayoverTime,string AreaStatus)
         {
-            string FilterKey = DeparturePlace + PointOfInterest + LayoverTime;
+            string FilterKey = DeparturePlace + PointOfInterest + LayoverTime + AreaStatus;
             var FilterData = _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey) == null ?
-            await GetFilterData(await _getSearch.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest), DeparturePlace, LayoverTime, FilterKey)
+            await GetFilterData(await _getSearch.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest,AreaStatus), DeparturePlace, LayoverTime, FilterKey)
             : _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey);
 
             if (FilterData != null)
@@ -61,7 +61,7 @@ namespace ThingsToDoProject.Controllers
         [HttpGet("outsideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}/{LayoverTime}")]
         public async Task<IActionResult> GetOutsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest,int LayoverTime)
         {
-            string FilterKey = DeparturePlace + PointOfInterest + LayoverTime;
+            string FilterKey = DeparturePlace + PointOfInterest + LayoverTime + "Outside";
             var FilterData = _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey) == null ?
             await GetFilterData(await _getAllData.GetAllData(DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest), DeparturePlace, LayoverTime, FilterKey)
             : _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey);
@@ -78,7 +78,7 @@ namespace ThingsToDoProject.Controllers
         //PointOfInterest is any Stores/Restorents...etc
         public async Task<IActionResult> GetInsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest,int LayoverTime)
         {
-            string FilterKey = DeparturePlace + PointOfInterest + LayoverTime;
+            string FilterKey = DeparturePlace + PointOfInterest + LayoverTime + "Inside";
             var FilterData = _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey) == null ?
             await GetFilterData(await _getData.GetData(_getLatitudeLongitude.Get(DeparturePlace), DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest), DeparturePlace, LayoverTime, FilterKey)
             : _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey);
@@ -93,7 +93,7 @@ namespace ThingsToDoProject.Controllers
         [HttpGet("InsideOutsideAirport/{DeparturePlace}/{ArrivalDateTime}/{DepartureDateTime}/{PointOfInterest}/{LayoverTime}")]
         public async Task<IActionResult> GetInsideOutsideData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest,int LayoverTime)
         {
-            string FilterKey = DeparturePlace + PointOfInterest + LayoverTime;
+            string FilterKey = DeparturePlace + PointOfInterest + LayoverTime + "InsideOutside";
             var FilterData = _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey) == null ?
             await GetFilterData(await _getInsideOutsideData.GetInsideOutsideData(_getLatitudeLongitude.Get(DeparturePlace), DeparturePlace, ArrivalDateTime, DepartureDateTime, PointOfInterest), DeparturePlace, LayoverTime, FilterKey)
             : _allDataExchangethroughRedisCache.GetDataFromCache<List<PlaceAttributes>>(FilterKey);
@@ -144,57 +144,5 @@ namespace ThingsToDoProject.Controllers
         {
             _setReminderData.SetReminderForAll(phoneNumber);
         }
-
-        ////GET: api/Data/distancetime
-        //[HttpGet("distancetime/{DeparturePlace}/{DestinationPosition}")]
-        //public async Task<IActionResult> GetDistanceTimeParticularPoints(String DeparturePlace,string DestinationPosition)
-        //{
-        //    LocationAttributes Position = _getLatitudeLongitude.Get(DeparturePlace + "Airport");
-        //    var Data = await _getDistanceTime.GetDistanceTime(Position, DestinationPosition);
-        //    if (Data != null)
-        //        return Ok(Data);
-        //    else
-        //        return BadRequest("Not Found");
-        //}
-
-        ////GET: api/Data/placeAndDistanceTime
-        //[HttpGet("placeAndDIstanceTime/{placeId}/{DeparturePlace}/{DestinationPosition}")]
-        //public async Task<IActionResult> GetPlaceAndDistanceTime(String PlaceID, String DeparturePlace, string DestinationPosition)
-        //{
-
-        //}
-
-
-        //// GET: api/Data
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET: api/Data/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST: api/Data
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT: api/Data/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

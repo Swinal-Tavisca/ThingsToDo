@@ -30,7 +30,13 @@ namespace ThingsToDoProject.Core.Provider
                     DistanceTimeAttributes Journey = await _getDistanceTime.GetDistanceTime(DeparturePlace, AllData[Index].Latitude, AllData[Index].Longitude);
                     int TotalMinutes = 0;
                     int MinsPosition = Journey.Duration.IndexOf("m");
-                    if (Journey.Duration.Contains("hour"))
+                    if(Journey.Duration.Contains("hours")){
+                        int HourPosition = Journey.Duration.IndexOf("r");
+                        int hour = Convert.ToInt32(Journey.Duration.Substring(0, Journey.Duration.IndexOf("h")));
+                        int min = Convert.ToInt32(Journey.Duration.Substring(HourPosition + 2, 2));
+                        TotalMinutes = (hour * 60) + min;
+                    }
+                    else if (Journey.Duration.Contains("hour"))
                     {
                         int HourPosition = Journey.Duration.IndexOf("r");
                         int hour = Convert.ToInt32(Journey.Duration.Substring(0, Journey.Duration.IndexOf("h")));
@@ -54,10 +60,12 @@ namespace ThingsToDoProject.Core.Provider
                         data.Vicinity = AllData[Index].Vicinity;
                         data.Latitude = AllData[Index].Latitude;
                         data.Longitude = AllData[Index].Longitude;
+                        data.Duration = AllData[Index].Duration;
                         FilterData.Add(data);
                     }
                 }
                 _allDataExchangethroughRedisCache.SaveInCache(ref FilterData, FilterKey);
+                //List<PlaceAttributes> SortedList = FilterData.OrderBy(o => o.Duration).ToList();
                 return FilterData;
             }
             catch (Exception e)

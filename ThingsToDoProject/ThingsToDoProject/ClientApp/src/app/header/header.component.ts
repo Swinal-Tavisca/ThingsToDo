@@ -67,6 +67,7 @@ export class HeaderComponent implements OnInit {
 
   setAirportArea(area) {
     this.airportServices.setArea(area);
+    this.airportArea = area;
   }
 
   private _filter(value: string): string[] {
@@ -85,8 +86,10 @@ export class HeaderComponent implements OnInit {
      this.arrivalDatetime = this.route.snapshot.queryParamMap.get('ArrivalDateTime');
      this.DepartureDateTime = this.route.snapshot.queryParamMap.get('DepartureDateTime');
      this.arrivalterminal = this.route.snapshot.queryParamMap.get('ArrivalTerminal');
-     this.departureterminal = this.route.snapshot.queryParamMap.get('DepartureTerminal');
-    this.http.get('/api/Data/search/'+ this.location +' / ' + this.arrivalDatetime +' / ' +  this.DepartureDateTime +' / ' + this.airportServices.getInput()).
+    this.departureterminal = this.route.snapshot.queryParamMap.get('DepartureTerminal');
+    this.durationminutes = this.route.snapshot.queryParamMap.get('DurationMinutes');
+
+    this.http.get('/api/Data/search/' + this.location + ' / ' + this.arrivalDatetime + ' / ' + this.DepartureDateTime + ' / ' + this.airportServices.getInput() + '/' + this.durationminutes + '/' + this.airportArea).
    subscribe((response)=>
    {
      this.response=response;

@@ -27,11 +27,13 @@ namespace ThingsToDoProject.Core.Provider
         {
             try
             {
+                String place = DeparturePlace;
+                place = place.Replace("Airport", "");
                 var _googleClient = _httpClientFactory.CreateClient("GoogleClient");
                 Uri endpoint = _googleClient.BaseAddress; // Returns GoogleApi
                 var Key = _iconfiguration["GoogleAPI"];
 
-                var Url = endpoint.ToString() + "maps/api/place/textsearch/json?query=" + PointOfInterest + "+in+" + DeparturePlace + "&language=en&key=" + Key;
+                var Url = endpoint.ToString() + "maps/api/place/textsearch/json?query=" + PointOfInterest + "+in+" + place + "&language=en&key=" + Key;
 
                 var _client = _httpClientFactory.CreateClient();
                 var response = await _client.GetAsync(Url);
@@ -39,8 +41,11 @@ namespace ThingsToDoProject.Core.Provider
                 string responseBody = await response.Content.ReadAsStringAsync();
                 RootobjectOfData data = JsonConvert.DeserializeObject<RootobjectOfData>(responseBody);
                 List<PlaceAttributes> Data = data.results.TransalateData(Key, endpoint);
-
-                  return Data;
+                //List<PlaceAttributes> SortedList = Data.OrderBy(o => o.Rating).ToList();
+                //List<PlaceAttributes> SortedList = Data.OrderBy(o => o.Rating).ToList();
+                //SortedList.Reverse();
+                //return SortedList;
+                return Data;
             }
             catch (Exception e)
             {

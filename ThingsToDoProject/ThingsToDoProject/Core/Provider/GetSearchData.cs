@@ -21,15 +21,30 @@ namespace ThingsToDoProject.Core.Provider
             _httpClientFactory = httpClientFactory;
             _iconfiguration = configuration;
         }
-        public async Task<List<PlaceAttributes>> GetAllData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        public async Task<List<PlaceAttributes>> GetAllData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest,string AreaStatus)
         {
             try
             {
                 var _googleClient = _httpClientFactory.CreateClient("GoogleClient");
                 Uri endpoint = _googleClient.BaseAddress; // Returns GoogleApi
                 var Key = _iconfiguration["GoogleAPI"];
+                var Url = "";
+                if(AreaStatus== "insideAirport")
+                {
+                     Url = endpoint.ToString() + "maps/api/place/textsearch/json?query=" + PointOfInterest + "+inside+" + DeparturePlace + "&language=en&key=" + Key;
+                }
+                else if(AreaStatus== "outsideAirport")
+                {
+                    String place = DeparturePlace;
+                    place = place.Replace("Airport", "");
+                    Url = endpoint.ToString() + "maps/api/place/textsearch/json?query=" + PointOfInterest + "+in+" + place + "&language=en&key=" + Key;
+                }
+                else
+                {
+                    Url = endpoint.ToString() + "maps/api/place/textsearch/json?query=" + PointOfInterest + "+in+" + DeparturePlace + "&language=en&key=" + Key;
+                }
 
-                var Url = endpoint.ToString() + "maps/api/place/textsearch/json?query=" + PointOfInterest + "+inside+" + DeparturePlace + "&language=en&key=" + Key;
+                
 
                 var _client = _httpClientFactory.CreateClient();
                 var response = await _client.GetAsync(Url);

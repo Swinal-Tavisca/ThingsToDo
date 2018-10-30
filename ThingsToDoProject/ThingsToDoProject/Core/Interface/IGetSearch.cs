@@ -8,6 +8,6 @@ namespace ThingsToDoProject.Core.Interface
 {
     public interface IGetSearch
     {
-        Task<List<PlaceAttributes>> GetAllData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest);
+        Task<List<PlaceAttributes>> GetAllData(String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest,string AreaStatus);
     }
 }
