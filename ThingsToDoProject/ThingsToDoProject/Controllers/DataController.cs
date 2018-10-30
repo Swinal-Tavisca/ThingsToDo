@@ -134,15 +134,15 @@ namespace ThingsToDoProject.Controllers
                 return BadRequest("Not Found");
         }
         [HttpGet("reminder/{phoneNumber}/{placeId}/{name}/{distance}/{storeNumber}")]
-        public void SetReminder(string phoneNumber, string placeId, string name, string distance, string storeNumber,string GoogleUrl)
+        public void SetReminder(string phoneNumber, string placeId, string name, string distance, string storeNumber,string returnUrl)
         {
 
-            _setReminderData.SetReminderForIternary(phoneNumber, placeId, name, distance, storeNumber, GoogleUrl);
+            _setReminderData.SetReminderForIternary(phoneNumber, placeId, name, distance, storeNumber, returnUrl);
         }
         [HttpGet("reminder/{phoneNumber}")]
-        public void SetReminder(string phoneNumber,string GoogleUrl)
+        public void SetReminder(string phoneNumber,string returnUrl)
         {
-            _setReminderData.SetReminderForAll(phoneNumber,GoogleUrl);
+            _setReminderData.SetReminderForAll(phoneNumber,returnUrl);
         }
 
         ////GET: api/Data/distancetime
