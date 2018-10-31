@@ -26,7 +26,7 @@ export class SideSectionComponent implements OnInit {
 
   SetReminder() {
     this.url = window.location.href;
-    this.http.get('/api/Data/reminder/' + this.value + '/' + this.response.placeID + '/' + this.response.name + '/' + this.response.distance + '/' + this.response.phoneNumber + "?returnUrl=" + this.url)
+    this.http.get('http://ec2-13-232-217-95.ap-south-1.compute.amazonaws.com/api/Data/reminder/' + this.value + '/' + this.response.placeID + '/' + this.response.name + '/' + this.response.distance + '/' + this.response.phoneNumber + "?returnUrl=" + this.url)
     .subscribe();
   }
 
@@ -43,7 +43,7 @@ CloseSection(){
 GetAllDataOfParticularPlace(){
   this.loader = true;
 
-  let observable = this.http.get('/api/Data/place/'+ this.location + '/'+this.PlaceId )
+  let observable = this.http.get('http://ec2-13-232-217-95.ap-south-1.compute.amazonaws.com/api/Data/place/'+ this.location + '/'+this.PlaceId )
 
   observable.subscribe((response)  => {
     this.response=response;
