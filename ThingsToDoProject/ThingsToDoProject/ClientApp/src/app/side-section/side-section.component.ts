@@ -26,12 +26,6 @@ export class SideSectionComponent implements OnInit {
 
   SetReminder() {
     this.url = window.location.href;
-    console.log("url:", this.url);
-    console.log(this.value);
-    console.log(this.response);
-
-
-    //[HttpGet("reminder/{phoneNumber}/{placeId}/{name}/{distance}/{storeNumber}/{GoogleUrl}")]
     this.http.get('/api/Data/reminder/' + this.value + '/' + this.response.placeID + '/' + this.response.name + '/' + this.response.distance + '/' + this.response.phoneNumber + "?returnUrl=" + this.url)
     .subscribe();
   }
@@ -50,10 +44,6 @@ GetAllDataOfParticularPlace(){
   this.loader = true;
 
   let observable = this.http.get('/api/Data/place/'+ this.location + '/'+this.PlaceId )
-  // .subscribe(
-  //   data => this.response=data,
-  //   error => this.response=false,
-  // );
 
   observable.subscribe((response)  => {
     this.response=response;
@@ -62,13 +52,9 @@ GetAllDataOfParticularPlace(){
   error=>{
     if(error.status==400 || error.status==404)
     {
-      //this.response=null;
+
        this.response.image = this.image;
-      // this.response.name = "name not found";
-      // this.response.duration="data not available";
-      // this.response.distance="data not available";
-      // this.response.
-     
+   
     }
     this.loader = false;
   
@@ -76,13 +62,7 @@ GetAllDataOfParticularPlace(){
 
   }
 
-  // subscribe((response)=>
-  // {
-  //   this.response = response;
-  //   if(this.response==null){
-  //     this.response=null;
-  //   }
-  // })
+
 
   ngOnInit() {
   }
