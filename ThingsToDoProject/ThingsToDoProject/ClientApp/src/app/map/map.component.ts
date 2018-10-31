@@ -34,7 +34,7 @@ export class MapComponent implements OnInit{
   {
   this.loader = true;
 
-   let observable =  this.http.get('/api/Data/place/'+ this.location + '/'+ placeid );
+   let observable =  this.http.get('http://ec2-13-232-217-95.ap-south-1.compute.amazonaws.com/api/Data/place/'+ this.location + '/'+ placeid );
     observable.subscribe((response)  => {
       this.res=response;
       if(this.res.image!=null)
@@ -105,7 +105,7 @@ response: any;
       this.origin = {lat :this.lat,lng :this.lng};
       this.dataService.origin = this.origin;
     })
-    this.http.get('/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.airportServices.getInput() +'/' + this.durationminutes).
+    this.http.get('http://ec2-13-232-217-95.ap-south-1.compute.amazonaws.com/api/Data/'+ this.airportServices.area +'/'+ this.location +'/' + this.arrivalDatetime +'/' +  this.DepartureDateTime +'/' + this.airportServices.getInput() +'/' + this.durationminutes).
   subscribe((response)=>
   {
     // console.log(response);
