@@ -9,7 +9,6 @@
   width: 100%;
 }
 .Data {
-  /*border: 1px solid red;*/
   display:flex;
   width: 25%;
   height: inherit;
@@ -22,7 +21,6 @@
   min-width: 400px;
 }
 .Map {
-  /*border: 1px solid red;*/
   width: 75%;
   height: inherit;
   text-align: center;
@@ -48,25 +46,6 @@
    }
 }
 
-/* @media only screen and (max-width: 959px) {
-  .flex-container {
-    display: flex;
-    flex-direction:row; 
-    height:92vh; 
-   
-    
-  }
-  .Data{
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    min-width: 300px;
-    }
-  .Map{
-    width: 75%;
-   }
- 
-}*/
 @media only screen and (max-width: 959px) {
   .flex-container {
     display: flex;
