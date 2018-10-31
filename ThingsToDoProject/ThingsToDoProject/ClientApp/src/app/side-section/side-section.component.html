@@ -7,7 +7,7 @@
 
           <mat-card-title>
             <b>{{response.name}}</b>
-            <button mat-icon-button (click)="CloseSection()">
+            <button class=" CrossButton" mat-icon-button (click)="CloseSection()">
               <mat-icon>close</mat-icon>
             </button>
             <br>
@@ -15,7 +15,7 @@
 
         </mat-card-header>
 
-        <img mat-card-image src={{response.image}} alt="Photo of a Shiba Inu">
+        <img mat-card-image src={{response.image}} alt="Image not Found!">
 
         <b>Duration:</b> {{response.duration}}<br>
 
@@ -68,7 +68,7 @@
                   Set Reminder
                 </mat-panel-title>
                 <mat-panel-description>
-                  <mat-icon>notifications</mat-icon>
+                  <mat-icon class="red-icon">notifications</mat-icon>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <mat-form-field>
@@ -113,9 +113,6 @@
 
         </mat-card-content>
 
-        <!-- <button mat-raised-button mat-list-item (click)="openDialog()">
-    <mat-icon>notifications</mat-icon>Set Reminder
-    </button> -->
 
       </mat-card>
     </div>
@@ -143,7 +140,6 @@
           Close <mat-icon>close</mat-icon>
         </button></mat-card-title>
     </mat-card-header>
-    <img mat-card-image class="no-data-img" src="../src/assets/images/loader.gif" alt="Image Not Found">
     <div class="centered">
       <mat-spinner></mat-spinner>
     </div>
@@ -155,4 +151,4 @@
   </mat-card>
 
 </div>
-<!-- <img *ngIf="loader" class="loader" src="../src/assets/images/loader.gif"> -->
+

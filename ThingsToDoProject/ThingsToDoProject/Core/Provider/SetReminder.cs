@@ -22,18 +22,19 @@ namespace ThingsToDoProject.Core.Provider
 
         }
 
-        public void SetReminderForIternary(string phoneNumber, string placeId, string name, string distance, string storeNumber, string GoogleUrl)
+        public void SetReminderForIternary(string phoneNumber, string placeId, string name, string distance, string storeNumber, string returnUrl)
         {
             var authToken = _iconfiguration["TwilioAuthToken"];
             var accountSid = _iconfiguration["TwilioAccountSid"];
 
             TwilioClient.Init(accountSid, authToken);
             string number = "whatsapp:+91" + phoneNumber;
+
             try
             {
 
                 var message = MessageResource.Create(
-                    body: "Hello you have set a reminder for" + name + "/br distance to this place from airport is" + distance + "/br Phone No :" + storeNumber + "/br Google Map Link:" + GoogleUrl + "",
+                    body: "Hello you have set a reminder for" + name + " distance to this place from airport is" + distance + " Phone No :" + storeNumber + " Things To Do Link:" + "http://google.com",
                     from: new Twilio.Types.PhoneNumber("whatsapp:+14155238886"),
                     to: new Twilio.Types.PhoneNumber(number)
                 );
@@ -43,9 +44,9 @@ namespace ThingsToDoProject.Core.Provider
             {
                 Console.WriteLine(e.Message);
             }
-         
+
         }
-        public void SetReminderForAll(string phoneNumber)
+        public void SetReminderForAll(string phoneNumber, string returnUrl)
         {
             var authToken = _iconfiguration["TwilioAuthToken"];
             var accountSid = _iconfiguration["TwilioAccountSid"];
@@ -66,9 +67,7 @@ namespace ThingsToDoProject.Core.Provider
             {
                 Console.WriteLine(e.Message);
             }
-        
+
         }
     }
 }
-
-

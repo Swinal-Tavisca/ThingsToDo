@@ -65,7 +65,7 @@ namespace ThingsToDoProject.Core.Provider
                     }
                 }
                 _allDataExchangethroughRedisCache.SaveInCache(ref FilterData, FilterKey);
-                //List<PlaceAttributes> SortedList = FilterData.OrderBy(o => o.Duration).ToList();
+                
                 return FilterData;
             }
             catch (Exception e)

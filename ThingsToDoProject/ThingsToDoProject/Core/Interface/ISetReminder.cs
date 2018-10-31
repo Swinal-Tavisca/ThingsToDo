@@ -9,6 +9,6 @@ namespace ThingsToDoProject.Core.Interface
     {
         void SetReminderForIternary(string phoneNumber, string placeId, string name, string distance, string storeNumber, string GoogleUrl);
 
-        void SetReminderForAll(string phoneNumber);
+        void SetReminderForAll(string phoneNumber, string GoogleUrl);
     }
 }

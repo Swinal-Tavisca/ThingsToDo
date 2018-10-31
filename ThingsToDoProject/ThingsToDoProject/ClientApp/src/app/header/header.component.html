@@ -49,45 +49,44 @@
     </mat-toolbar>
     <mat-sidenav-container fxFlexFill>
         <mat-sidenav #sidenav>
-            <mat-nav-list>
+          <mat-nav-list>
 
-                <mat-list-item role="listitem" *ngIf="selected=='outside'">
-                    <div *ngIf="selected=='outside'">
-                        <mat-chip class="chip" [routerLink]='["/attractions"]' [routerLinkActive]='["link-active"]'
-                            [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve">
-                            <mat-icon>store</mat-icon>Attractions
-                        </mat-chip>
-                    </div>
-                </mat-list-item>
-                <mat-list-item role="listitem">
-                    <mat-chip class="chip" [routerLink]='["/restaurant"]' [routerLinkActive]='["link-active"]'
+            <mat-list-item role="listitem" *ngIf="selected=='outside'">
+              <div *ngIf="selected=='outside'">
+                <mat-chip (click)="sidenav.toggle()" class="chip" [routerLink]='["/attractions"]' [routerLinkActive]='["link-active"]'
+                          [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve">
+                  <mat-icon>local_activity</mat-icon>Attractions
+                </mat-chip>
+              </div>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+              <mat-chip (click)="sidenav.toggle()" class="chip" [routerLink]='["/restaurant"]' [routerLinkActive]='["link-active"]'
                         [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-button>
-                        <mat-icon>store</mat-icon> Restaurant
-                    </mat-chip>
-                </mat-list-item>
-                <mat-list-item role="listitem">
-                    <mat-chip class="chip" [routerLink]='["/store"]' [routerLinkActive]='["link-active"]'
+                <mat-icon>restaurant</mat-icon> Restaurant
+              </mat-chip>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+              <mat-chip (click)="sidenav.toggle()" class="chip" [routerLink]='["/store"]' [routerLinkActive]='["link-active"]'
                         [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-button>
-                        <mat-icon>store</mat-icon> Store
-                    </mat-chip>
-                </mat-list-item>
-                <mat-list-item role="listitem">
-                    <mat-chip color="primary" selected>{{location}}</mat-chip>
-                </mat-list-item>
-                <mat-list-item role="listitem">
-                    <mat-chip color="accent" selected>{{duration}}</mat-chip>
-                </mat-list-item>
-                <mat-list-item role="listitem">
-                    <button mat-raised-button (click)="openDialog()">
-                        <mat-icon>notifications</mat-icon>Set Reminder
-                    </button>
-                </mat-list-item>
-                <a (click)="sidenav.toggle()" mat-list-item>
-                    <mat-icon>close</mat-icon> Close
-                </a>
+                <mat-icon>store</mat-icon> Store
+              </mat-chip>
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <button mat-raised-button (click)="openDialog()">
+                <mat-icon>notifications</mat-icon>Set Reminder
+              </button>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+              <mat-chip color="primary" selected>{{location}}</mat-chip>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+              <mat-chip color="accent" selected>{{duration}}</mat-chip>
+            </mat-list-item>
+         
 
 
-            </mat-nav-list>
+          </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content fxFlexFill>
             <div fxShow="true" fxHide.lt-md="true">
@@ -98,13 +97,13 @@
                             <div *ngIf="selected=='outside'">
                                 <mat-chip class="chip" [routerLink]='["/attractions"]' [routerLinkActive]='["link-active"]'
                                     [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve">
-                                    <mat-icon>store</mat-icon>Attractions
+                                    <mat-icon>local_activity</mat-icon>Attractions
                                 </mat-chip>
                             </div>
                             <div class="space"></div>
                             <mat-chip class="chip" [routerLink]='["/restaurant"]' [routerLinkActive]='["link-active"]'
                                 [routerLinkActiveOptions]='{ exact: true }' queryParamsHandling="preserve" mat-button>
-                                <mat-icon>store</mat-icon> Restaurant
+                                <mat-icon>restaurant</mat-icon> Restaurant
                             </mat-chip>
                             <div class="space"></div>
                             <mat-chip class="chip" [routerLink]='["/store"]' [routerLinkActive]='["link-active"]'

@@ -2,40 +2,43 @@
   <div *ngFor="let data of dataService.response">
     <mat-card class="example-card">
       <div class="mat-cards" (click)="MoreInfo(data.placeID)">
-        
-        <div>    
-          <div *ngIf =data.image>
+
+        <div>
+          <div *ngIf=data.image>
             <img mat-card-image src={{data.image}}>
             <!-- <img mat-card-image src="../src/assets/images/404notfound.jpg"> -->
           </div>
-          <div *ngIf =!data.image>
-              <img mat-card-image src="../src/assets/images/404notfound.jpg">
-            </div>
+          <div *ngIf=!data.image>
+            <img mat-card-image src="../src/assets/images/404notfound.jpg">
+          </div>
         </div>
         <div class="content">
-            <div><h5>{{ data.name }}</h5></div>
-            <div *ngIf = data.rating>
-              <div class="stars-align">
-              <div *ngFor="let in of counter(data.rating)" >
-               <img class="stars" src="../src/assets/images/star.jpg">
-              
+          <div><h4>{{ data.name }}</h4></div>
+          <div *ngIf=data.rating>
+            <div class="stars-align">
+              <div *ngFor="let in of counter(data.rating)">
+                <img class="stars" src="../src/assets/images/star.jpg">
+
+              </div>
             </div>
-            </div> 
           </div>
-          <div *ngIf = "data.openClosedStatus">
-              <h4>Open Now</h4>
-            </div>
-            <div *ngIf = "!data.openClosedStatus">
-                <h4>Closed</h4>
-              </div><br>
+          <div *ngIf="data.openClosedStatus">
+            <h5>Open Now</h5>
+          </div>
+          <div *ngIf="!data.openClosedStatus">
+            <h5>Closed</h5>
+          </div><br>
           <!-- <h6>{{data.address}}</h6> -->
-          <mat-chip-list>
-              <mat-chip  (click)="dataService.getDirection(data.latitude,data.longitude)">GetDirection</mat-chip>
-              <button mat-mini-fab><mat-icon>arrow_right_alt</mat-icon></button>
-            </mat-chip-list>
+          <mat-chip-list class="mat-chip-list-wrapper">
+            <mat-chip (click)="dataService.getDirection(data.latitude,data.longitude)">GetDirection</mat-chip>
+            <button mat-mini-fab><mat-icon>arrow_right_alt</mat-icon></button>
+          </mat-chip-list>
         </div>
       </div>
-        </mat-card>
+    </mat-card>
   </div>
-</div>
-  
+  <div *ngIf="!dataService.response">/
+  Data Not Found
+  </div>
+  </div>
+

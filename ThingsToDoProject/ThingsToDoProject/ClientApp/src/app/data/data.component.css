@@ -9,6 +9,14 @@
     flex-direction:row;
     justify-content: left; 
   }
+  .mat-chip-list-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: -4px;
+  justify-content: center !important;
+  }
   img{
     width:9em;
     height:9em;

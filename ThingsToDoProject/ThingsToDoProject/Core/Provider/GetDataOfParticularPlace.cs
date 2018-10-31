@@ -36,8 +36,7 @@ namespace ThingsToDoProject.Core.Provider
         {
             try
             {
-                //using (HttpClient client = new HttpClient())
-                //{
+                
                 var client = _httpClientFactory.CreateClient("GoogleClient");
                 Uri endpoint = client.BaseAddress; // Returns GoogleApi
                 var Key = _iconfiguration["GoogleAPI"];

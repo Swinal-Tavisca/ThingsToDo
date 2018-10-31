@@ -17,11 +17,9 @@
  width:30%;
  height: 141.4%;
   }
-  
+
   /* Highlighting rules for nav menu items */
-  a.link-active,
-  a.link-active a:hover,
-  a.link-active a:focus {
+  a .link-active, a.link-active a:hover, a.link-active a:focus {
       background-color: #4189C7;
       color: white;
   }
@@ -48,4 +46,3 @@
   .example-panel-blue .mat-select-panel {
     background: rgba(0, 0, 255, 0.5);
   }
-  

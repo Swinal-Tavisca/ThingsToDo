@@ -52,9 +52,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
   SetReminder() {
-
-    this.http.get('/api/Data/reminder/' + this.phonenumber + "?returnUrl" + this.url)
-      .subscribe();
+      this.http.get('/api/Data/reminder/' + this.phonenumber + "?returnUrl" + this.url)
+        .subscribe();
 
   }
   openDialog(): void {
@@ -68,7 +67,7 @@ export class HeaderComponent implements OnInit {
       console.log('The dialog was closed');
       this.phonenumber = result;
       console.log(this.phonenumber);
-      window.open("https://wa.me/14155238886?text=join%20lemon-mule");
+      window.location.href="https://wa.me/14155238886?text=join%20lemon-mule";
       this.SetReminder();
     });
   }

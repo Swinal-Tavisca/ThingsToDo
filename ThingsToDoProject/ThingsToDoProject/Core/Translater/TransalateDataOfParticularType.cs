@@ -16,8 +16,7 @@ namespace ThingsToDoProject.Core.Translater
 
             for (int Index = 0; Index < results.Length; Index++)
             {
-                //DataDetails.Add(new PlaceAttributes
-                //{
+               
                 PlaceAttributes data = new PlaceAttributes();
                 data.Name = results[Index].name ?? results[Index].name;
                 data.Address = results[Index].formatted_address ?? results[Index].formatted_address;
@@ -28,11 +27,7 @@ namespace ThingsToDoProject.Core.Translater
                 data.Vicinity = results[Index].vicinity == null ? null : results[Index].vicinity;
                 data.Latitude = results[Index].geometry.location.lat == 0 ? 0 : results[Index].geometry.location.lat;
                 data.Longitude = results[Index].geometry.location.lng == 0 ? 0 : results[Index].geometry.location.lng;
-                   // WeekDaysDetail = results[Index].opening_hours.weekday_text,//results.reviews == null ? null : results.reviews.ToList(),
-                   // GoogleMapUrl = results[Index].url,
-                    //Website = results[Index].website,
-
-                //});
+                
                 DataDetails.Add(data);
             }
             return DataDetails;

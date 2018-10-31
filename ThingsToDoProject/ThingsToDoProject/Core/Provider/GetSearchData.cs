@@ -52,8 +52,7 @@ namespace ThingsToDoProject.Core.Provider
                 string responseBody = await response.Content.ReadAsStringAsync();
                 RootobjectOfData data = JsonConvert.DeserializeObject<RootobjectOfData>(responseBody);
                 List<PlaceAttributes> Data = data.results.TransalateData(Key, endpoint);
-
-                //List<PlaceAttributes> SortedList = Data.OrderBy(o => o.Rating).ToList();
+                
 
                 return Data;
             }
