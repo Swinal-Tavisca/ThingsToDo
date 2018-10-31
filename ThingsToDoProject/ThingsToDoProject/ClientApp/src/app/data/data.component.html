@@ -27,7 +27,6 @@
           <div *ngIf="!data.openClosedStatus">
             <h5>Closed</h5>
           </div><br>
-          <!-- <h6>{{data.address}}</h6> -->
           <mat-chip-list class="mat-chip-list-wrapper">
             <mat-chip (click)="dataService.getDirection(data.latitude,data.longitude)">GetDirection</mat-chip>
             <button mat-mini-fab><mat-icon>arrow_right_alt</mat-icon></button>
