@@ -1,11 +1,14 @@
+<form #loginForm="ngForm">
 <div mat-dialog-content>
     <p>Please Enter your phone number</p>
+    
     <mat-form-field>
-      <input name="phone" matInput [(ngModel)]="data.phonenumber" required minlength="10" maxlength="10" >
+      <input name="phone" matInput [(ngModel)]="data.phonenumber" required minlength="10" maxlength="10">
     </mat-form-field>
+  
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button [mat-dialog-close]="data.phonenumber"  (click)="onClickAuthorize()" [disabled]="isDisabled" cdkFocusInitial>Ok</button>
+    <button mat-button [mat-dialog-close]="data.phonenumber" type="submit" [disabled]="loginForm.form.invalid" (click)="onClickAuthorize()"  cdkFocusInitial>Ok</button>
   </div>
-  
+</form>

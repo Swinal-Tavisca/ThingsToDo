@@ -51,6 +51,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
+
   SetReminder() {
     this.http.get('api/Data/reminder/' + this.phonenumber + "?returnUrl" + this.url)
       .subscribe();
@@ -60,9 +61,8 @@ export class HeaderComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogOverview, {
       width: '250px',
       data: { phonenumber: this.phonenumber }
-
+      
     });
-
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log('The dialog was closed');
     //   this.phonenumber = result;
@@ -123,7 +123,6 @@ export class DialogOverview {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
 
   }
-
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -132,8 +131,5 @@ export class DialogOverview {
       'https://wa.me/14155238886?text=join%20lemon-mule',
       '_blank'
     );
-
-
   }
-
 }

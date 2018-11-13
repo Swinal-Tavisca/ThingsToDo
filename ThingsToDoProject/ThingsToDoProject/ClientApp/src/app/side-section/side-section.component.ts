@@ -24,6 +24,7 @@ export class SideSectionComponent implements OnInit {
     this.url = window.location.href;
     this.http.get('api/Data/reminder/' + this.value + '/' + this.response.placeID + '/' + this.response.name + '/' + this.response.distance + '/' + this.response.phoneNumber + "?returnUrl=" + this.url)
       .subscribe();
+    this.toggle.emit("ok");
   }
 
   ngOnChanges() {
