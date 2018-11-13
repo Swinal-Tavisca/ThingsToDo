@@ -22,7 +22,7 @@ export class SideSectionComponent implements OnInit {
 
   SetReminder() {
     this.url = window.location.href;
-    this.http.get('api/Data/reminder/' + this.value + '/' + this.response.placeID + '/' + this.response.name + '/' + this.response.distance + '/' + this.response.phoneNumber + "?returnUrl=" + this.url)
+    this.http.get('http://localhost/api/Data/reminder/' + this.value + '/' + this.response.placeID + '/' + this.response.name + '/' + this.response.distance + '/' + this.response.phoneNumber + "?returnUrl=" + this.url)
       .subscribe();
     this.toggle.emit("ok");
   }
@@ -39,7 +39,7 @@ export class SideSectionComponent implements OnInit {
 
   GetAllDataOfParticularPlace() {
     this.loader = true;
-    let observable = this.http.get('api/Data/place/' + this.location + '/' + this.PlaceId)
+    let observable = this.http.get('http://localhost/api/Data/place/' + this.location + '/' + this.PlaceId)
 
     observable.subscribe((response) => {
       this.response = response;
