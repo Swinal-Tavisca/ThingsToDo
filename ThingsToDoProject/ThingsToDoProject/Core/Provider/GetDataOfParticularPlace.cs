@@ -23,7 +23,7 @@ namespace ThingsToDoProject.Core.Provider
         private readonly IAllDataExchangethroughRedisCache _allDataExchangethroughRedisCache;
         IConfiguration _iconfiguration;
 
-        public GetDataOfParticularPlace(IHttpClientFactory httpClientFactory, IConfiguration configuration, 
+        public GetDataOfParticularPlace(IHttpClientFactory httpClientFactory, IConfiguration configuration,
             IGetDistanceTime getDistanceTime, IGetLatitudeLongitude getLatitudeLongitude, IAllDataExchangethroughRedisCache allDataExchangethroughRedisCache)
         {
             _httpClientFactory = httpClientFactory;
@@ -32,11 +32,11 @@ namespace ThingsToDoProject.Core.Provider
             _getLatitudeLongitude = getLatitudeLongitude;
             _allDataExchangethroughRedisCache = allDataExchangethroughRedisCache;
         }
-        public async Task<PlaceAttributes> GetPlaceData(string DeparturePlace , string PlaceId)
+        public async Task<PlaceAttributes> GetPlaceData(string DeparturePlace, string PlaceId)
         {
             try
             {
-                
+
                 var client = _httpClientFactory.CreateClient("GoogleClient");
                 Uri endpoint = client.BaseAddress; // Returns GoogleApi
                 var Key = _iconfiguration["GoogleAPI"];

@@ -8,7 +8,7 @@ using ThingsToDoProject.Model;
 
 namespace ThingsToDoProject.Core.Provider
 {
-    public class GetDataAccordingToLayoverTime: IGetDataAccordingToLayoverTime
+    public class GetDataAccordingToLayoverTime : IGetDataAccordingToLayoverTime
     {
 
         private readonly IGetDistanceTime _getDistanceTime;
@@ -20,17 +20,18 @@ namespace ThingsToDoProject.Core.Provider
             _allDataExchangethroughRedisCache = allDataExchangethroughRedisCache;
         }
 
-        public async Task<List<PlaceAttributes>> GetFilterData(List<PlaceAttributes>AllData  , string DeparturePlace, int LayoverTime,string FilterKey)
+        public async Task<List<PlaceAttributes>> GetFilterData(List<PlaceAttributes> AllData, string DeparturePlace, int LayoverTime, string FilterKey)
         {
             try
             {
                 List<PlaceAttributes> FilterData = new List<PlaceAttributes>();
-                for(int Index = 0; Index < AllData.Count; Index++)
+                for (int Index = 0; Index < AllData.Count; Index++)
                 {
                     DistanceTimeAttributes Journey = await _getDistanceTime.GetDistanceTime(DeparturePlace, AllData[Index].Latitude, AllData[Index].Longitude);
                     int TotalMinutes = 0;
                     int MinsPosition = Journey.Duration.IndexOf("m");
-                    if(Journey.Duration.Contains("hours")){
+                    if (Journey.Duration.Contains("hours"))
+                    {
                         int HourPosition = Journey.Duration.IndexOf("r");
                         int hour = Convert.ToInt32(Journey.Duration.Substring(0, Journey.Duration.IndexOf("h")));
                         int min = Convert.ToInt32(Journey.Duration.Substring(HourPosition + 2, 2));
@@ -40,8 +41,8 @@ namespace ThingsToDoProject.Core.Provider
                     {
                         int HourPosition = Journey.Duration.IndexOf("r");
                         int hour = Convert.ToInt32(Journey.Duration.Substring(0, Journey.Duration.IndexOf("h")));
-                        int min = Convert.ToInt32(Journey.Duration.Substring(HourPosition+1, 2));
-                        TotalMinutes = (hour*60) + min;
+                        int min = Convert.ToInt32(Journey.Duration.Substring(HourPosition + 1, 2));
+                        TotalMinutes = (hour * 60) + min;
                     }
                     else
                     {
@@ -49,7 +50,8 @@ namespace ThingsToDoProject.Core.Provider
                     }
                     int CommutingTime = (2 * TotalMinutes) + 60;
                     int IsPossible = LayoverTime - CommutingTime;
-                    if (IsPossible > 0 && LayoverTime >= CommutingTime){
+                    if (IsPossible > 0 && LayoverTime >= CommutingTime)
+                    {
                         PlaceAttributes data = new PlaceAttributes();
                         data.Name = AllData[Index].Name;
                         data.Address = AllData[Index].Address;
@@ -65,7 +67,7 @@ namespace ThingsToDoProject.Core.Provider
                     }
                 }
                 _allDataExchangethroughRedisCache.SaveInCache(ref FilterData, FilterKey);
-                
+
                 return FilterData;
             }
             catch (Exception e)

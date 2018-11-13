@@ -23,7 +23,7 @@ namespace ThingsToDoProject.Core.Provider
             _iconfiguration = configuration;
             _getLatitudeLongitude = getLatitudeLongitude;
         }
-        public async Task<DistanceTimeAttributes> GetDistanceTime(string DeparturePlace,float DestinationLatitude , float DestinationLongitude)
+        public async Task<DistanceTimeAttributes> GetDistanceTime(string DeparturePlace, float DestinationLatitude, float DestinationLongitude)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace ThingsToDoProject.Core.Provider
                 var client = _httpClientFactory.CreateClient("GoogleClient");
                 Uri endpoint = client.BaseAddress; // Returns GoogleApi
                 var Key = _iconfiguration["GoogleAPI"];
-                var Url = endpoint.ToString() + "maps/api/directions/json?origin=" + SourcePosition.LatitudePosition + "," + SourcePosition.LongitudePosition + "&destination="+ DestinationLatitude +","+ DestinationLongitude + " &key=" + Key;
+                var Url = endpoint.ToString() + "maps/api/directions/json?origin=" + SourcePosition.LatitudePosition + "," + SourcePosition.LongitudePosition + "&destination=" + DestinationLatitude + "," + DestinationLongitude + " &key=" + Key;
                 var client1 = _httpClientFactory.CreateClient();
                 var response = await client1.GetAsync(Url);
 
@@ -48,5 +48,5 @@ namespace ThingsToDoProject.Core.Provider
             return null;
         }
     }
-    
+
 }

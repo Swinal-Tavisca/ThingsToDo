@@ -10,13 +10,13 @@ namespace ThingsToDoProject.Core.Translater
 {
     public static class TransalateDataOfParticularType
     {
-        public static List<PlaceAttributes> TransalateData(this Result[] results, string Key , Uri Url)
+        public static List<PlaceAttributes> TransalateData(this Result[] results, string Key, Uri Url)
         {
             List<PlaceAttributes> DataDetails = new List<PlaceAttributes>();
 
             for (int Index = 0; Index < results.Length; Index++)
             {
-               
+
                 PlaceAttributes data = new PlaceAttributes();
                 data.Name = results[Index].name ?? results[Index].name;
                 data.Address = results[Index].formatted_address ?? results[Index].formatted_address;
@@ -27,7 +27,7 @@ namespace ThingsToDoProject.Core.Translater
                 data.Vicinity = results[Index].vicinity == null ? null : results[Index].vicinity;
                 data.Latitude = results[Index].geometry.location.lat == 0 ? 0 : results[Index].geometry.location.lat;
                 data.Longitude = results[Index].geometry.location.lng == 0 ? 0 : results[Index].geometry.location.lng;
-                
+
                 DataDetails.Add(data);
             }
             return DataDetails;

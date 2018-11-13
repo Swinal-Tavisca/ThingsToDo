@@ -17,7 +17,7 @@ namespace ThingsToDoProject.Core.Translater
                 PlaceDetails.Distance = result[0].legs[0].distance.text;
                 return PlaceDetails;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return null;

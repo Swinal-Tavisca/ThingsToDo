@@ -8,7 +8,7 @@ using ThingsToDoProject.Model;
 
 namespace ThingsToDoProject.Core
 {
-    public class LogAttribute: ResultFilterAttribute, IActionFilter
+    public class LogAttribute : ResultFilterAttribute, IActionFilter
     {
         Log logValue = new Log();
         LoggingThroughCassandra loggingObject = new LoggingThroughCassandra();

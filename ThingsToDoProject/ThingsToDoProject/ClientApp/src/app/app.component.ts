@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { Airport } from './airport.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { Airport } from './airport.service';
 })
 export class AppComponent {
   /* Search */
-  value:any;
+  value: any;
   panelColor = new FormControl('red');
   airportArea: string = 'InsideOutsideAirport';
 
@@ -19,8 +19,8 @@ export class AppComponent {
   options: string[] = ['Bar', 'Spa', 'Store'];
   filteredOptions: Observable<string[]>;
 
-  constructor(public airportServices: Airport) {}
-  
+  constructor(public airportServices: Airport) { }
+
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),

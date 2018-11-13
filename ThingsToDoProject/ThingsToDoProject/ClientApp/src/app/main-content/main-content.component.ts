@@ -19,7 +19,7 @@ export class MainContentComponent implements OnInit {
     this.sideSectionIsOpened = !this.sideSectionIsOpened;
   }
 
-  MoreInfo(Id: string){
+  MoreInfo(Id: string) {
     this.PlaceId = Id;
     this.sideSectionIsOpened = !this.sideSectionIsOpened;
   }

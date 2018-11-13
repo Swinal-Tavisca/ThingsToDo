@@ -20,37 +20,37 @@ namespace ThingsToDoProject.Core.Provider
         private readonly IHttpClientFactory _httpClientFactory;
         IConfiguration _iconfiguration;
 
-        public GetInsideAirportData(IHttpClientFactory httpClientFactory , IConfiguration configuration)
+        public GetInsideAirportData(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
             _iconfiguration = configuration;
         }
-        public async Task<List<PlaceAttributes>> GetData(LocationAttributes Position , String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
+        public async Task<List<PlaceAttributes>> GetData(LocationAttributes Position, String DeparturePlace, String ArrivalDateTime, String DepartureDateTime, String PointOfInterest)
         {
             try
             {
-                
-                    var client = _httpClientFactory.CreateClient(Constants.GoogleClient);
-                    Uri endpoint = client.BaseAddress; // Returns GoogleApi
-                    var Key = _iconfiguration["GoogleAPI"];
-                    
-                    var Url = endpoint.ToString() + "maps/api/place/nearbysearch/json?location=" + Position.LatitudePosition + "," + Position.LongitudePosition + "&radius=1000&type=" + PointOfInterest  + "&key=" + Key;
-                    var client1 = _httpClientFactory.CreateClient();
-                    var response = await client1.GetAsync(Url);
 
-                    response.EnsureSuccessStatusCode();
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    RootobjectOfData data = JsonConvert.DeserializeObject<RootobjectOfData>(responseBody);
-                    List<PlaceAttributes> Data = data.results.TransalateData(Key, endpoint);
-                    
+                var client = _httpClientFactory.CreateClient(Constants.GoogleClient);
+                Uri endpoint = client.BaseAddress; // Returns GoogleApi
+                var Key = _iconfiguration["GoogleAPI"];
+
+                var Url = endpoint.ToString() + "maps/api/place/nearbysearch/json?location=" + Position.LatitudePosition + "," + Position.LongitudePosition + "&radius=1000&type=" + PointOfInterest + "&key=" + Key;
+                var client1 = _httpClientFactory.CreateClient();
+                var response = await client1.GetAsync(Url);
+
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                RootobjectOfData data = JsonConvert.DeserializeObject<RootobjectOfData>(responseBody);
+                List<PlaceAttributes> Data = data.results.TransalateData(Key, endpoint);
+
                 return Data;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
             return null;
         }
     }
-    
+
 }

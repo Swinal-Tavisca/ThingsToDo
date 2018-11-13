@@ -52,8 +52,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
   SetReminder() {
-      this.http.get('http://ec2-13-232-217-95.ap-south-1.compute.amazonaws.com/api/Data/reminder/' + this.phonenumber + "?returnUrl" + this.url)
-        .subscribe();
+    this.http.get('api/Data/reminder/' + this.phonenumber + "?returnUrl" + this.url)
+      .subscribe();
 
   }
   openDialog(): void {
@@ -63,13 +63,13 @@ export class HeaderComponent implements OnInit {
 
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.phonenumber = result;
-      console.log(this.phonenumber);
-      window.location.href="https://wa.me/14155238886?text=join%20lemon-mule";
-      this.SetReminder();
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    //   this.phonenumber = result;
+    //   console.log(this.phonenumber);
+    //   //window.location.href="https://wa.me/14155238886?text=join%20lemon-mule";
+    //   // this.SetReminder();
+    // });
   }
 
   setAirportArea(area) {
@@ -94,7 +94,7 @@ export class HeaderComponent implements OnInit {
     this.arrivalterminal = this.route.snapshot.queryParamMap.get('ArrivalTerminal');
     this.departureterminal = this.route.snapshot.queryParamMap.get('DepartureTerminal');
     this.durationminutes = this.route.snapshot.queryParamMap.get('DurationMinutes');
-    this.http.get('http://ec2-13-232-217-95.ap-south-1.compute.amazonaws.com/api/Data/search/' + this.location + ' / ' + this.arrivalDatetime + ' / ' + this.DepartureDateTime + ' / ' + this.airportServices.getInput() + '/' + this.durationminutes + '/' + this.airportArea).
+    this.http.get('api/Data/search/' + this.location + ' / ' + this.arrivalDatetime + ' / ' + this.DepartureDateTime + ' / ' + this.airportServices.getInput() + '/' + this.durationminutes + '/' + this.airportArea).
       subscribe((response) => {
         this.response = response;
         this.dataService.response = this.response;
@@ -121,10 +121,19 @@ export class DialogOverview {
   constructor(
     public dialogRef: MatDialogRef<DialogOverview>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  onClickAuthorize(): void {
+    window.open(
+      'https://wa.me/14155238886?text=join%20lemon-mule',
+      '_blank'
+    );
+
+
   }
 
 }
