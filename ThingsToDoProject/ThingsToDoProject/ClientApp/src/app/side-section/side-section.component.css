@@ -6,7 +6,6 @@
   top: 8vh;
   width: 20%;
   height: 78vh;
- 
   z-index: 4;
   background: #ccc;
   min-width: 300px;
@@ -17,8 +16,7 @@
 }
 img{
   padding: 1.5em;
-  width: 100%;
-  
+  width: 100%; 
   }
 .red-icon {
   color: #4189C7;
@@ -42,28 +40,21 @@ img{
       box-sizing: border-box;
       display: none;
       position: absolute;
-      margin-left: 0%;
-      
+      margin-left: 0%;    
       top: 8vh;
       width: 20%;
-      height: 77.5vh;
-     
+      height: 77.5vh;   
       z-index: 4;
       background: #ccc;
       min-width: 300px;
     }  
     .example-card{
-  
       overflow-y: auto;
-      
-      overflow-x: hidden;
-      
+      overflow-x: hidden;  
       height: 77.5vh; 
     }  
     .no-data-img{
-      width:inherit;
-      height:inherit;
-      
+      height:auto; 
     }
   }
 @media only screen and (max-width:959px){
@@ -71,27 +62,20 @@ img{
     box-sizing: border-box;
     display: none;
     position: absolute;
-    margin-left: 0%;
-    
+    margin-left: 0%;    
     top: 0vh;
-    width: 100%;
-   
+    width: 100%;   
     z-index: 4;
     background: #ccc;
     min-width: 300px;
   }
   .example-card{
-
-    overflow-y: auto;
-    
-    overflow-x: hidden;
-    
+    overflow-y: auto;  
+    overflow-x: hidden;  
     height: 100%;
-
 }
 .no-data-img{
   width:inherit;
-  height:inherit;
-  
+  height:inherit;  
 }
 }

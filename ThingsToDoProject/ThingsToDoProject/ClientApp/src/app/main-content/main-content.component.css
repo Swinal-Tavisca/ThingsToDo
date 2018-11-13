@@ -32,8 +32,6 @@
     display: flex;
     flex-direction:row; 
     height: 90vh;
-
-
   }
   .Data{
     display: flex;
@@ -49,20 +47,15 @@
 @media only screen and (max-width: 959px) {
   .flex-container {
     display: flex;
-    flex-direction:column-reverse;   
-    
+    flex-direction:column-reverse;       
     overflow-y: scroll;
- 
   }
   .Data{
     display: flex;
     flex-direction: column;
     width: 100%;
-  
     }
   .Map{
-    width: 100%;
- 
-    
+    width: 100%;  
    }
 }

@@ -1,4 +1,4 @@
-.example-card{
+  .example-card{
   width: 96%;
   margin-left: 2%;
   margin-top:2%;
@@ -10,12 +10,12 @@
     justify-content: left; 
   }
   .mat-chip-list-wrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+  display: flex !important;
+  flex-direction: row ;
+  flex-wrap: wrap ;
+  align-items: center ;
   margin: -4px;
-  justify-content: center !important;
+  justify-content: auto !important;
   }
   img{
     width:9em;
@@ -41,13 +41,14 @@
     margin-top: 1em;
   }
   .stars{
-    width:1.5vh;
-    height:1.5vh;
+    width:0.7em;
+    height:0.7em;
+    padding: 0em;
   }
   .stars-align{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: center;  
   }
   .img-set{
     align-self: center;

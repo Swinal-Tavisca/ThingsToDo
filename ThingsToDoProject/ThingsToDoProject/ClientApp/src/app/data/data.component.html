@@ -1,4 +1,4 @@
-<div id="narrow" class="demo-card-container">
+<div id="narrow">
   <div *ngFor="let data of dataService.response">
     <mat-card class="example-card">
       <div class="mat-cards" (click)="MoreInfo(data.placeID)">
@@ -17,7 +17,6 @@
             <div class="stars-align">
               <div *ngFor="let in of counter(data.rating)">
                 <img class="stars" src="../src/assets/images/star.jpg">
-
               </div>
             </div>
           </div>
