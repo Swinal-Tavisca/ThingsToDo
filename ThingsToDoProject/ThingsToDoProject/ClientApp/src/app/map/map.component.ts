@@ -32,7 +32,7 @@ export class MapComponent implements OnInit {
   data: any;
   getDataOfParticularPlace(marker: any, placeid: string) {
     this.loader = true;
-    let observable = this.http.get('api/Data/place/' + this.location + '/' + placeid);
+    let observable = this.http.get('http://localhost/api/Data/place/' + this.location + '/' + placeid);
     observable.subscribe((response) => {
       this.res = response;
       if (this.res.image != null) {
@@ -89,14 +89,14 @@ export class MapComponent implements OnInit {
     this.isDataLoaded = true;
     this.city = this.route.snapshot.queryParamMap.get('location');
 
-    this.http.get('/api/Data/position/' + this.city).subscribe((response) => {
+    this.http.get('http://localhost/api/Data/position/' + this.city).subscribe((response) => {
       this.Getresponse = response;
       this.lat = this.Getresponse.latitudePosition;
       this.lng = this.Getresponse.longitudePosition;
       this.origin = { lat: this.lat, lng: this.lng };
       this.dataService.origin = this.origin;
     })
-    this.http.get('api/Data/' + this.airportServices.area + '/' + this.location + '/' + this.arrivalDatetime + '/' + this.DepartureDateTime + '/' + this.airportServices.getInput() + '/' + this.durationminutes).
+    this.http.get('http://localhost/api/Data/' + this.airportServices.area + '/' + this.location + '/' + this.arrivalDatetime + '/' + this.DepartureDateTime + '/' + this.airportServices.getInput() + '/' + this.durationminutes).
       subscribe((response) => {
         // console.log(response);
         this.response = response;
