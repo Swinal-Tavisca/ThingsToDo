@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
   }
 
   SetReminder() {
-    this.http.get('http://localhost/api/Data/reminder/' + this.phonenumber + "?returnUrl" + this.url)
+    this.http.get('api/Data/reminder/' + this.phonenumber + "?returnUrl" + this.url)
       .subscribe();
 
   }
@@ -94,7 +94,7 @@ export class HeaderComponent implements OnInit {
     this.arrivalterminal = this.route.snapshot.queryParamMap.get('ArrivalTerminal');
     this.departureterminal = this.route.snapshot.queryParamMap.get('DepartureTerminal');
     this.durationminutes = this.route.snapshot.queryParamMap.get('DurationMinutes');
-    this.http.get('http://localhost/api/Data/search/' + this.location + ' / ' + this.arrivalDatetime + ' / ' + this.DepartureDateTime + ' / ' + this.airportServices.getInput() + '/' + this.durationminutes + '/' + this.airportArea).
+    this.http.get('api/Data/search/' + this.location + ' / ' + this.arrivalDatetime + ' / ' + this.DepartureDateTime + ' / ' + this.airportServices.getInput() + '/' + this.durationminutes + '/' + this.airportArea).
       subscribe((response) => {
         this.response = response;
         this.dataService.response = this.response;
